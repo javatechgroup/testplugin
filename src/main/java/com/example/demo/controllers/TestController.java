@@ -9,7 +9,6 @@ public class TestController {
 	@GetMapping("/test")
 	public String test() {
 		try {
-		System.out.println("TestController: test() method called");
 		}catch(Exception e) {
 		}
 		return "Test successful!";

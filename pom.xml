@@ -68,6 +68,7 @@
 		<!-- <failOnSeverity>NONE</failOnSeverity> -->
 		<!-- Set custom output directory if you don't want default target/architecture-guard -->
 		<outputDirectory>${project.basedir}/reports</outputDirectory>
+		 <ratchet>true</ratchet>
 	</configuration>
 </plugin>
 		</plugins>
