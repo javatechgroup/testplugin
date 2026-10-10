@@ -1,0 +1,924 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Architecture Guard",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/javatechgroup/ArchGaurd",
+          "rules": [
+            {
+              "id": "AG001",
+              "name": "Controller to Repository Direct Dependency",
+              "shortDescription": {
+                "text": "Controller to Repository Direct Dependency"
+              },
+              "fullDescription": {
+                "text": "Controllers must not directly depend on Repository components. Encapsulate business logic and data access in the Service layer."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG002",
+              "name": "Controller to Controller Direct Dependency",
+              "shortDescription": {
+                "text": "Controller to Controller Direct Dependency"
+              },
+              "fullDescription": {
+                "text": "Controllers must not depend on other controllers. Shared business logic should be moved to a shared Service component."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG003",
+              "name": "Service to Controller Inverted Dependency",
+              "shortDescription": {
+                "text": "Service to Controller Inverted Dependency"
+              },
+              "fullDescription": {
+                "text": "Services must not depend on controllers. Lower-layer components must not depend on higher-layer web presentation components."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG004",
+              "name": "Repository to Service Inverted Dependency",
+              "shortDescription": {
+                "text": "Repository to Service Inverted Dependency"
+              },
+              "fullDescription": {
+                "text": "Repositories must not depend on service classes. The persistence layer must remain decoupled from business workflows."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG005",
+              "name": "Class-Level Cyclic Dependency",
+              "shortDescription": {
+                "text": "Class-Level Cyclic Dependency"
+              },
+              "fullDescription": {
+                "text": "Cyclic dependencies between classes increase coupling, inhibit modular testing, and create brittle architectures."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG006",
+              "name": "Package Boundary Violation",
+              "shortDescription": {
+                "text": "Package Boundary Violation"
+              },
+              "fullDescription": {
+                "text": "Dependencies between packages must follow configured package boundary rules."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG007",
+              "name": "Prohibited Field Injection",
+              "shortDescription": {
+                "text": "Prohibited Field Injection"
+              },
+              "fullDescription": {
+                "text": "Field injection using @Autowired/@Inject on private fields is discouraged. Use constructor injection to ensure immutability and ease of testing."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG008",
+              "name": "Swallowed or Ignored Exception",
+              "shortDescription": {
+                "text": "Swallowed or Ignored Exception"
+              },
+              "fullDescription": {
+                "text": "Empty or silent catch blocks hide critical errors and lead to silent application failures. Exceptions must be logged or rethrown."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG009",
+              "name": "Missing @Transactional on Multi-Repository Operations",
+              "shortDescription": {
+                "text": "Missing @Transactional on Multi-Repository Operations"
+              },
+              "fullDescription": {
+                "text": "Service methods that invoke multiple repository operations without @Transactional risk partial database commits and inconsistent state upon failure."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG010",
+              "name": "Unsafe Mutable Static State in Spring Bean",
+              "shortDescription": {
+                "text": "Unsafe Mutable Static State in Spring Bean"
+              },
+              "fullDescription": {
+                "text": "Static mutable fields and collections in singleton Spring beans are shared across concurrent HTTP request threads, creating race conditions and memory leaks."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG011",
+              "name": "Direct Console Output (System.out / printStackTrace)",
+              "shortDescription": {
+                "text": "Direct Console Output (System.out / printStackTrace)"
+              },
+              "fullDescription": {
+                "text": "Directly writing to System.out or System.err bypasses application logging configuration, timestamps, log levels, and structured log sinks."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG012",
+              "name": "Direct Entity Exposure in REST Endpoint",
+              "shortDescription": {
+                "text": "Direct Entity Exposure in REST Endpoint"
+              },
+              "fullDescription": {
+                "text": "Exposing JPA/Database entities directly in REST API endpoints leaks internal database schema, sensitive columns, and causes LazyInitializationException or JSON recursion."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG013",
+              "name": "Hardcoded Credential or Secret",
+              "shortDescription": {
+                "text": "Hardcoded Credential or Secret"
+              },
+              "fullDescription": {
+                "text": "Hardcoded secrets, API tokens, and passwords in source code create severe security vulnerabilities and can be leaked via version control."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG014",
+              "name": "JPA Eager Fetch / N+1 Query Risk",
+              "shortDescription": {
+                "text": "JPA Eager Fetch / N+1 Query Risk"
+              },
+              "fullDescription": {
+                "text": "Using FetchType.EAGER in JPA entity mappings causes eager joins, large memory footprints, and N+1 query performance degradation."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG015",
+              "name": "Missing @Valid on REST RequestBody",
+              "shortDescription": {
+                "text": "Missing @Valid on REST RequestBody"
+              },
+              "fullDescription": {
+                "text": "Accepting @RequestBody parameters without @Valid or @Validated allows malformed, unvalidated payloads into domain logic without validation constraints."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG016",
+              "name": "Unpaginated Collection in REST Controller",
+              "shortDescription": {
+                "text": "Unpaginated Collection in REST Controller"
+              },
+              "fullDescription": {
+                "text": "Returning unpaginated List/Set collections from REST endpoints causes memory pressure (OutOfMemoryError) and slow queries when database tables grow."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG017",
+              "name": "Injected Dependency Bloat / God Class",
+              "shortDescription": {
+                "text": "Injected Dependency Bloat / God Class"
+              },
+              "fullDescription": {
+                "text": "Classes with 7 or more injected collaborators typically violate the Single Responsibility Principle and indicate God Class / high coupling antipatterns."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG018",
+              "name": "High Method Complexity",
+              "shortDescription": {
+                "text": "High Method Complexity"
+              },
+              "fullDescription": {
+                "text": "Methods with high cyclomatic complexity (> 15) contain too many decision branches, making them error-prone, hard to comprehend, and difficult to test."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG019",
+              "name": "Algorithmic Performance Risk (O(n^2) / DB in Loop)",
+              "shortDescription": {
+                "text": "Algorithmic Performance Risk (O(n^2) / DB in Loop)"
+              },
+              "fullDescription": {
+                "text": "Detects expensive quadratic operations (e.g. List.contains() in a loop) or network/database calls inside loops that cause performance bottlenecks."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG020",
+              "name": "Code Readability & Clean Code Antipatterns",
+              "shortDescription": {
+                "text": "Code Readability & Clean Code Antipatterns"
+              },
+              "fullDescription": {
+                "text": "Flags code readability bottlenecks including oversized classes/files (>450 lines), deep nesting (>=4 levels), monster methods (>60 lines), and long parameter lists (>=5)."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG021",
+              "name": "Spring Proxy Self-Invocation Bypass",
+              "shortDescription": {
+                "text": "Spring Proxy Self-Invocation Bypass"
+              },
+              "fullDescription": {
+                "text": "Detects direct internal invocations (this.method() or local calls) of @Transactional, @Async, @Cacheable, or @Retryable methods within the same Spring bean, which bypasses Spring's AOP proxy and silently ignores the annotation."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG022",
+              "name": "Singleton Spring Bean Mutable Instance State",
+              "shortDescription": {
+                "text": "Singleton Spring Bean Mutable Instance State"
+              },
+              "fullDescription": {
+                "text": "Detects non-final, mutable instance state in singleton Spring beans (@Service, @Component, @RestController, @Repository). Because Spring beans are singletons by default, mutable state shared across concurrent HTTP requests causes severe race conditions and corrupted data."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG023",
+              "name": "NullPointer Traps & Defensive Coding Antipatterns",
+              "shortDescription": {
+                "text": "NullPointer Traps & Defensive Coding Antipatterns"
+              },
+              "fullDescription": {
+                "text": "Detects high-risk NullPointer antipatterns including calling Optional.get() directly without presence checks, returning null from collection/Optional-returning methods, and calling .equals() directly on nullable variables."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "AG024",
+              "name": "Unclosed AutoCloseable Resource / I/O Leak",
+              "shortDescription": {
+                "text": "Unclosed AutoCloseable Resource / I/O Leak"
+              },
+              "fullDescription": {
+                "text": "Detects AutoCloseable resources (I/O Streams, JDBC Connections, ResultSets, Readers) instantiated outside of a try-with-resources statement, leading to OS file descriptor and database connection leaks."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "AG025",
+              "name": "Inefficient String Concatenation in Loop",
+              "shortDescription": {
+                "text": "Inefficient String Concatenation in Loop"
+              },
+              "fullDescription": {
+                "text": "Detects String concatenation ('+' or '+=') inside for/while loops. Repeated String concatenation in loops creates intermediate String instances on every iteration causing O(n^2) heap allocations and GC thrashing."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "AG003",
+          "level": "error",
+          "message": {
+            "text": "Service 'com.example.demo.controllers.TestService' has an inverted dependency on Controller 'com.example.demo.controllers.TestController'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG003",
+          "level": "error",
+          "message": {
+            "text": "Service 'com.example.demo.controllers.Service2' has an inverted dependency on Controller 'com.example.demo.controllers.TestController'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG005",
+          "level": "error",
+          "message": {
+            "text": "Cyclic class dependency detected: com.example.demo.controllers.Service2 -> com.example.demo.controllers.TestService -> com.example.demo.controllers.Service2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG008",
+          "level": "warning",
+          "message": {
+            "text": "Swallowed exception of type 'Exception' in method 'test'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/TestController.java"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG008",
+          "level": "warning",
+          "message": {
+            "text": "Swallowed exception of type 'Exception' in method 'processOrderBatch'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 72,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG009",
+          "level": "warning",
+          "message": {
+            "text": "Service method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' executes 2 repository calls without @Transactional boundary."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG010",
+          "level": "error",
+          "message": {
+            "text": "Unsafe static state on field 'com.example.demo.controllers.TestController.counter' (type: int). Non-final static field creates race condition in singleton Spring bean."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/TestController.java"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG011",
+          "level": "warning",
+          "message": {
+            "text": "Direct console call 'System.out.println' in method 'anonymous'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/TestService.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG018",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' has high complexity of 21 (threshold is 15)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG019",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' contains Database query in loop (N+1 roundtrips)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG019",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' contains O(n^2) collection lookup in loop."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG019",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' contains Database query in loop (N+1 roundtrips)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG020",
+          "level": "warning",
+          "message": {
+            "text": "Class 'com.example.demo.controllers.ViolatingOrderProcessingService': Long parameter list in 'processOrderBatch' (>= 5 params)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG020",
+          "level": "warning",
+          "message": {
+            "text": "Class 'com.example.demo.controllers.ViolatingOrderProcessingService': Deep nesting / Arrow antipattern in 'processOrderBatch' (depth >= 4)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG021",
+          "level": "error",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.processOrderBatch()' directly self-invokes '@Transactional executeTransactionalOrderSave()', bypassing Spring AOP proxy."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG021",
+          "level": "error",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.processOrderBatch()' directly self-invokes '@Async dispatchAsyncNotification()', bypassing Spring AOP proxy."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG022",
+          "level": "error",
+          "message": {
+            "text": "Singleton Service 'com.example.demo.controllers.ViolatingEnterpriseQualityService' declares mutable instance field 'dateFormatter' (SimpleDateFormat). Non-thread-safe formatter (SimpleDateFormat) creates race conditions in concurrent request threads."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG022",
+          "level": "error",
+          "message": {
+            "text": "Singleton Service 'com.example.demo.controllers.ViolatingEnterpriseQualityService' declares mutable instance field 'activeBatchRequests' (List<String>). Non-final mutable collection creates cross-request state contamination."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG022",
+          "level": "error",
+          "message": {
+            "text": "Singleton Service 'com.example.demo.controllers.ViolatingEnterpriseQualityService' declares mutable instance field 'processedOrderCounter' (int). Non-final state variable in singleton bean causes multithreaded data race."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.getOrderHistory()' returns null instead of empty collection/Optional."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'userRole.equals(\"ADMIN\")' in method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.getOrderHistory()' throws NullPointerException if 'userRole' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Direct call to 'optionalUserId.get()' in method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.getOrderHistory()' risks NoSuchElementException / NullPointer if empty."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'regionCode.equals(\"US\")' in method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' throws NullPointerException if 'regionCode' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'regionCode.equals(\"EU\")' in method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' throws NullPointerException if 'regionCode' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'regionCode.equals(\"APAC\")' in method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' throws NullPointerException if 'regionCode' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 37,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'currency.equals(\"USD\")' in method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' throws NullPointerException if 'currency' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG023",
+          "level": "warning",
+          "message": {
+            "text": "Calling 'currency.equals(\"EUR\")' in method 'com.example.demo.controllers.ViolatingOrderProcessingService.processOrderBatch()' throws NullPointerException if 'currency' is null."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingOrderProcessingService.java"
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG024",
+          "level": "error",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.loadConfigurationFile()' creates AutoCloseable resource 'fis' (FileInputStream) outside try-with-resources."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "AG025",
+          "level": "warning",
+          "message": {
+            "text": "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.buildOrderAuditLogCsv()' performs repeated String concatenation inside a for-each loop."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/demo/controllers/ViolatingEnterpriseQualityService.java"
+                },
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
