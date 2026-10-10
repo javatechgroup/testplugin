@@ -29,6 +29,10 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -51,26 +55,28 @@
 					</execution>
 				</executions>
 			</plugin>-->
-			
+
 			<plugin>
-	<groupId>com.architectureguard</groupId>
-	<artifactId>architecture-guard-maven-plugin</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
-	<executions>
-		<execution>
-			<goals>
-				<goal>check</goal>
-			</goals>
-		</execution>
-	</executions>
-	<configuration>
-		<!-- Set to 'NONE' if you want reports without failing the build -->
-		<!-- <failOnSeverity>NONE</failOnSeverity> -->
-		<!-- Set custom output directory if you don't want default target/architecture-guard -->
-		<outputDirectory>${project.basedir}/reports</outputDirectory>
-		 <ratchet>true</ratchet>
-	</configuration>
-</plugin>
+				<groupId>com.architectureguard</groupId>
+				<artifactId>architecture-guard-maven-plugin</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Set to 'NONE' if you want reports without failing the
+					build -->
+					<!-- <failOnSeverity>NONE</failOnSeverity> -->
+					<!-- Set custom output directory if you don't want default
+					target/architecture-guard -->
+					<outputDirectory>${project.basedir}/reports</outputDirectory>
+					<ratchet>true</ratchet>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
