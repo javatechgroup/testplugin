@@ -1,0 +1,19 @@
+analysis:
+  failOnSeverity: ERROR
+  failOnNewViolations: false
+  outputDir: reports
+
+packages:
+  controller:
+    - com.example.demo.controllers.*
+  service:
+    - com.example.demo.controllers.*
+    - com.example.demo.boundary.*
+  repository:
+    - com.example.demo.controllers.*
+  entity:
+    - com.example.demo.controllers.*
+
+packageBoundaries:
+  com.example.demo.boundary.external:
+    - com.example.demo.boundary.publicapi
