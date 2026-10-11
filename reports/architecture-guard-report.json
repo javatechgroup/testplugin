@@ -1,12 +1,12 @@
 {
   "projectName" : "testplugin",
-  "projectVersion" : "0.0.1-SNAPSHOT",
+  "projectVersion" : "0.0.1",
   "metadata" : {
     "toolVersion" : "1.0.0",
     "schemaVersion" : "1.0.0",
     "targetProjectPath" : "E:\\Booking\\testplugin",
-    "timestamp" : "2026-10-11T06:38:57.440438900Z",
-    "executionDurationMs" : 729
+    "timestamp" : "2026-10-11T13:08:49.296576900Z",
+    "executionDurationMs" : 834
   },
   "status" : "FAILED_VIOLATIONS",
   "classesAnalyzed" : 26,
@@ -131,7 +131,7 @@
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "METHOD_CALL",
     "description" : "Invokes method getAmount on com.example.demo.controllers.Order",
-    "lineNumber" : 65
+    "lineNumber" : 62
   }, {
     "sourceClass" : "com.example.demo.controllers.CompliantOrderProcessingService",
     "targetClass" : "com.example.demo.controllers.CompliantOrderProcessingService$BatchContext",
@@ -146,16 +146,8 @@
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "METHOD_CALL",
-    "description" : "Invokes method saveAll on com.example.demo.controllers.OrderRepository",
-    "lineNumber" : 43
-  }, {
-    "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "FIELD_TYPE",
-    "description" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-    "lineNumber" : -1
+    "description" : "Invokes method findAllById on com.example.demo.controllers.OrderRepository",
+    "lineNumber" : 36
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
     "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1",
@@ -166,11 +158,11 @@
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "FIELD_TYPE",
-    "description" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "description" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
@@ -179,6 +171,14 @@
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "FIELD_TYPE",
     "description" : "Field dep4 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep4",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "FIELD_TYPE",
+    "description" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
@@ -198,11 +198,11 @@
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "FIELD_TYPE",
-    "description" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+    "description" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
@@ -262,19 +262,19 @@
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
-    "targetClass" : "com.example.demo.controllers.OrderRepository",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "FIELD_TYPE",
-    "description" : "Field orderRepository of type com.example.demo.controllers.OrderRepository",
-    "lineNumber" : -1
-  }, {
-    "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
     "targetClass" : "com.example.demo.controllers.NotificationService",
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "FIELD_TYPE",
     "description" : "Field autowiredNotificationService of type com.example.demo.controllers.NotificationService",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
+    "targetClass" : "com.example.demo.controllers.OrderRepository",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "FIELD_TYPE",
+    "description" : "Field orderRepository of type com.example.demo.controllers.OrderRepository",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
@@ -318,19 +318,19 @@
     "lineNumber" : 30
   }, {
     "sourceClass" : "com.example.demo.controllers.TestService",
-    "targetClass" : "com.example.demo.controllers.TestController",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "FIELD_TYPE",
-    "description" : "Field testController of type com.example.demo.controllers.TestController",
-    "lineNumber" : -1
-  }, {
-    "sourceClass" : "com.example.demo.controllers.TestService",
     "targetClass" : "com.example.demo.controllers.Service2",
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "FIELD_TYPE",
     "description" : "Field service2 of type com.example.demo.controllers.Service2",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.TestService",
+    "targetClass" : "com.example.demo.controllers.TestController",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "FIELD_TYPE",
+    "description" : "Field testController of type com.example.demo.controllers.TestController",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.TestService",
@@ -347,6 +347,38 @@
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "CONSTRUCTOR_PARAM",
     "description" : "Constructor parameter of type com.example.demo.controllers.Service2",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.Service2",
+    "targetClass" : "com.example.demo.controllers.TestService",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "FIELD_TYPE",
+    "description" : "Field testService of type com.example.demo.controllers.TestService",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.Service2",
+    "targetClass" : "com.example.demo.controllers.TestController",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "FIELD_TYPE",
+    "description" : "Field testController of type com.example.demo.controllers.TestController",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.Service2",
+    "targetClass" : "com.example.demo.controllers.TestService",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "CONSTRUCTOR_PARAM",
+    "description" : "Constructor parameter of type com.example.demo.controllers.TestService",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.Service2",
+    "targetClass" : "com.example.demo.controllers.TestController",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "CONSTRUCTOR_PARAM",
+    "description" : "Constructor parameter of type com.example.demo.controllers.TestController",
     "lineNumber" : -1
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
@@ -386,8 +418,8 @@
     "sourcePackage" : "com.example.demo.controllers",
     "targetPackage" : "com.example.demo.controllers",
     "dependencyType" : "METHOD_CALL",
-    "description" : "Invokes method setStatus on com.example.demo.controllers.Order",
-    "lineNumber" : 58
+    "description" : "Invokes method setDiscountRate on com.example.demo.controllers.Order",
+    "lineNumber" : 56
   }, {
     "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
     "targetClass" : "com.example.demo.controllers.OrderRepository",
@@ -404,38 +436,6 @@
     "dependencyType" : "METHOD_CALL",
     "description" : "Invokes method alertFailure on com.example.demo.controllers.NotificationService",
     "lineNumber" : 73
-  }, {
-    "sourceClass" : "com.example.demo.controllers.Service2",
-    "targetClass" : "com.example.demo.controllers.TestService",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "FIELD_TYPE",
-    "description" : "Field testService of type com.example.demo.controllers.TestService",
-    "lineNumber" : -1
-  }, {
-    "sourceClass" : "com.example.demo.controllers.Service2",
-    "targetClass" : "com.example.demo.controllers.TestController",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "FIELD_TYPE",
-    "description" : "Field testController of type com.example.demo.controllers.TestController",
-    "lineNumber" : -1
-  }, {
-    "sourceClass" : "com.example.demo.controllers.Service2",
-    "targetClass" : "com.example.demo.controllers.TestService",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "CONSTRUCTOR_PARAM",
-    "description" : "Constructor parameter of type com.example.demo.controllers.TestService",
-    "lineNumber" : -1
-  }, {
-    "sourceClass" : "com.example.demo.controllers.Service2",
-    "targetClass" : "com.example.demo.controllers.TestController",
-    "sourcePackage" : "com.example.demo.controllers",
-    "targetPackage" : "com.example.demo.controllers",
-    "dependencyType" : "CONSTRUCTOR_PARAM",
-    "description" : "Constructor parameter of type com.example.demo.controllers.TestController",
-    "lineNumber" : -1
   } ],
   "classLayers" : {
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1" : [ "CONTROLLER" ],
@@ -444,8 +444,8 @@
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7" : [ "CONTROLLER" ],
     "com.example.demo.controllers.OrderRepository" : [ "REPOSITORY" ],
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2" : [ "CONTROLLER" ],
-    "com.example.demo.boundary.external.ExternalGatewayService" : [ "SERVICE" ],
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep3" : [ "CONTROLLER" ],
+    "com.example.demo.boundary.external.ExternalGatewayService" : [ "SERVICE" ],
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep4" : [ "CONTROLLER" ],
     "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep5" : [ "CONTROLLER" ],
     "com.example.demo.controllers.CompliantOrderProcessingService" : [ "SERVICE" ],
@@ -459,8 +459,8 @@
     "com.example.demo.controllers.ViolatingEnterpriseQualityService" : [ "SERVICE" ],
     "com.example.demo.controllers.TestService" : [ "SERVICE" ],
     "com.example.demo.controllers.TestController" : [ "CONTROLLER" ],
-    "com.example.demo.controllers.ViolatingOrderProcessingService" : [ "SERVICE" ],
     "com.example.demo.controllers.Service2" : [ "SERVICE" ],
+    "com.example.demo.controllers.ViolatingOrderProcessingService" : [ "SERVICE" ],
     "com.example.demo.controllers.DemoCustomerEntity" : [ "ENTITY" ],
     "com.example.demo.controllers.ViolatingArchitectureController$DemoCustomerDto" : [ "CONTROLLER" ]
   },
@@ -512,9 +512,9 @@
     "evidence" : "Method evaluateOrderStatus parameter of type com.example.demo.controllers.Order; Invokes method getAmount on com.example.demo.controllers.Order",
     "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\CompliantOrderProcessingService.java",
-    "lineNumber" : 65,
+    "lineNumber" : 62,
     "fingerprint" : "608f6ff37ca8a88b",
-    "codeSnippet" : "     62 |         if (order.getAmount() > 10000 && ctx.isVip()) {\r\n     63 |             order.setStatus(\"APPROVED_EXPEDITED\");\r\n     64 |             order.setDiscountRate(0.15);\r\n >   65 |         } else if (order.getAmount() > 5000) {\r\n     66 |             order.setStatus(\"APPROVED_STANDARD\");\r\n     67 |             order.setDiscountRate(0.05);\r\n     68 |         } else {\r\n"
+    "codeSnippet" : "     59 |             return;\r\n     60 |         }\r\n     61 | \r\n >   62 |         if (order.getAmount() > 10000 && ctx.isVip()) {\r\n     63 |             order.setStatus(\"APPROVED_EXPEDITED\");\r\n     64 |             order.setDiscountRate(0.15);\r\n     65 |         } else if (order.getAmount() > 5000) {\r\n"
   }, {
     "ruleId" : "AG003",
     "ruleName" : "Service to Controller Inverted Dependency",
@@ -533,18 +533,6 @@
     "ruleName" : "Service to Controller Inverted Dependency",
     "severity" : "ERROR",
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6'.",
-    "evidence" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-    "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
-    "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-    "fingerprint" : "90004f5e61b4e098",
-    "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
-  }, {
-    "ruleId" : "AG003",
-    "ruleName" : "Service to Controller Inverted Dependency",
-    "severity" : "ERROR",
-    "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
     "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1",
     "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1'.",
     "evidence" : "Field dep1 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1",
@@ -557,12 +545,12 @@
     "ruleName" : "Service to Controller Inverted Dependency",
     "severity" : "ERROR",
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
-    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2'.",
-    "evidence" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7'.",
+    "evidence" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
     "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-    "fingerprint" : "b0f1d1157c4a51da",
+    "fingerprint" : "a4a03da7498e0d9e",
     "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
   }, {
     "ruleId" : "AG003",
@@ -575,6 +563,18 @@
     "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
     "fingerprint" : "2adfbdc9eb59fdda",
+    "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
+  }, {
+    "ruleId" : "AG003",
+    "ruleName" : "Service to Controller Inverted Dependency",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2'.",
+    "evidence" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+    "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
+    "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
+    "fingerprint" : "b0f1d1157c4a51da",
     "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
   }, {
     "ruleId" : "AG003",
@@ -605,12 +605,12 @@
     "ruleName" : "Service to Controller Inverted Dependency",
     "severity" : "ERROR",
     "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
-    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7'.",
-    "evidence" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+    "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
+    "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6'.",
+    "evidence" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
     "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-    "fingerprint" : "a4a03da7498e0d9e",
+    "fingerprint" : "90004f5e61b4e098",
     "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
   }, {
     "ruleId" : "AG003",
@@ -629,19 +629,6 @@
     "ruleId" : "AG003",
     "ruleName" : "Service to Controller Inverted Dependency",
     "severity" : "ERROR",
-    "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
-    "targetClass" : "com.example.demo.controllers.Order",
-    "message" : "Service 'com.example.demo.controllers.ViolatingOrderProcessingService' has an inverted dependency on Controller 'com.example.demo.controllers.Order'.",
-    "evidence" : "Invokes method setStatus on com.example.demo.controllers.Order",
-    "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
-    "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingOrderProcessingService.java",
-    "lineNumber" : 58,
-    "fingerprint" : "81752491891408dc",
-    "codeSnippet" : "     55 |                                         order.setStatus(\"APPROVED_STANDARD\");\r\n     56 |                                         order.setDiscountRate(0.05);\r\n     57 |                                     } else {\r\n >   58 |                                         order.setStatus(\"APPROVED_CONVERTED\");\r\n     59 |                                         order.setDiscountRate(0.02);\r\n     60 |                                     }\r\n     61 |                                 } else if (order.getAmount() > 1000 && maxRetries > 2) {\r\n"
-  }, {
-    "ruleId" : "AG003",
-    "ruleName" : "Service to Controller Inverted Dependency",
-    "severity" : "ERROR",
     "sourceClass" : "com.example.demo.controllers.Service2",
     "targetClass" : "com.example.demo.controllers.TestController",
     "message" : "Service 'com.example.demo.controllers.Service2' has an inverted dependency on Controller 'com.example.demo.controllers.TestController'.",
@@ -651,6 +638,19 @@
     "lineNumber" : 8,
     "fingerprint" : "3a34e92dec805bc4",
     "codeSnippet" : "      5 | @Service\r\n      6 | public class Service2 {\r\n      7 | \tprivate final TestService testService;\r\n >    8 | \tprivate final TestController testController;\r\n      9 | \r\n     10 | \tpublic Service2(TestService testService, TestController testController) {\r\n     11 | \t\tthis.testService = testService;\r\n"
+  }, {
+    "ruleId" : "AG003",
+    "ruleName" : "Service to Controller Inverted Dependency",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
+    "targetClass" : "com.example.demo.controllers.Order",
+    "message" : "Service 'com.example.demo.controllers.ViolatingOrderProcessingService' has an inverted dependency on Controller 'com.example.demo.controllers.Order'.",
+    "evidence" : "Invokes method setDiscountRate on com.example.demo.controllers.Order",
+    "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
+    "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingOrderProcessingService.java",
+    "lineNumber" : 56,
+    "fingerprint" : "26c3fa83d65b9a0f",
+    "codeSnippet" : "     53 |                                 } else if (order.getAmount() > 5000) {\r\n     54 |                                     if (currency.equals(\"USD\") || currency.equals(\"EUR\")) {\r\n     55 |                                         order.setStatus(\"APPROVED_STANDARD\");\r\n >   56 |                                         order.setDiscountRate(0.05);\r\n     57 |                                     } else {\r\n     58 |                                         order.setStatus(\"APPROVED_CONVERTED\");\r\n     59 |                                         order.setDiscountRate(0.02);\r\n"
   }, {
     "ruleId" : "AG004",
     "ruleName" : "Repository to Service Inverted Dependency",
@@ -696,7 +696,7 @@
     "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
     "message" : "Field injection detected on 'com.example.demo.controllers.ViolatingArchitectureController.autowiredNotificationService' (type: NotificationService) with @Autowired.",
     "evidence" : "@Autowired NotificationService autowiredNotificationService",
-    "remediation" : "Replace @Autowired field with final field and constructor injection (or Lombok @RequiredArgsConstructor).",
+    "remediation" : "Replace @Autowired on 'autowiredNotificationService' with 'private final NotificationService autowiredNotificationService;' and inject via constructor (or annotate class with Lombok @RequiredArgsConstructor).",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingArchitectureController.java",
     "lineNumber" : 19,
     "fingerprint" : "f286c0ce3f73d970"
@@ -784,7 +784,7 @@
     "sourceClass" : "com.example.demo.controllers.TestService",
     "message" : "Direct console call 'System.out.println' in method 'anonymous'.",
     "evidence" : "System.out.println(\"TestService: Constructor called\")",
-    "remediation" : "Replace System.out/err/printStackTrace with an SLF4J logger (e.g., private static final Logger log = LoggerFactory.getLogger(...) or Lombok @Slf4j).",
+    "remediation" : "Replace 'System.out.println' with structured logging (e.g., 'private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.TestService.class);' or Lombok @Slf4j).",
     "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\TestService.java",
     "lineNumber" : 14,
     "fingerprint" : "010746597618b368"
@@ -1280,9 +1280,9 @@
       "evidence" : "Method evaluateOrderStatus parameter of type com.example.demo.controllers.Order; Invokes method getAmount on com.example.demo.controllers.Order",
       "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\CompliantOrderProcessingService.java",
-      "lineNumber" : 65,
+      "lineNumber" : 62,
       "fingerprint" : "608f6ff37ca8a88b",
-      "codeSnippet" : "     62 |         if (order.getAmount() > 10000 && ctx.isVip()) {\r\n     63 |             order.setStatus(\"APPROVED_EXPEDITED\");\r\n     64 |             order.setDiscountRate(0.15);\r\n >   65 |         } else if (order.getAmount() > 5000) {\r\n     66 |             order.setStatus(\"APPROVED_STANDARD\");\r\n     67 |             order.setDiscountRate(0.05);\r\n     68 |         } else {\r\n"
+      "codeSnippet" : "     59 |             return;\r\n     60 |         }\r\n     61 | \r\n >   62 |         if (order.getAmount() > 10000 && ctx.isVip()) {\r\n     63 |             order.setStatus(\"APPROVED_EXPEDITED\");\r\n     64 |             order.setDiscountRate(0.15);\r\n     65 |         } else if (order.getAmount() > 5000) {\r\n"
     }, {
       "ruleId" : "AG003",
       "ruleName" : "Service to Controller Inverted Dependency",
@@ -1301,18 +1301,6 @@
       "ruleName" : "Service to Controller Inverted Dependency",
       "severity" : "ERROR",
       "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6'.",
-      "evidence" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
-      "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
-      "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-      "fingerprint" : "90004f5e61b4e098",
-      "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
-    }, {
-      "ruleId" : "AG003",
-      "ruleName" : "Service to Controller Inverted Dependency",
-      "severity" : "ERROR",
-      "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
       "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1",
       "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1'.",
       "evidence" : "Field dep1 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1",
@@ -1325,12 +1313,12 @@
       "ruleName" : "Service to Controller Inverted Dependency",
       "severity" : "ERROR",
       "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
-      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2'.",
-      "evidence" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7'.",
+      "evidence" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
       "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-      "fingerprint" : "b0f1d1157c4a51da",
+      "fingerprint" : "a4a03da7498e0d9e",
       "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
     }, {
       "ruleId" : "AG003",
@@ -1343,6 +1331,18 @@
       "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
       "fingerprint" : "2adfbdc9eb59fdda",
+      "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
+    }, {
+      "ruleId" : "AG003",
+      "ruleName" : "Service to Controller Inverted Dependency",
+      "severity" : "ERROR",
+      "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
+      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2'.",
+      "evidence" : "Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2",
+      "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
+      "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
+      "fingerprint" : "b0f1d1157c4a51da",
       "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
     }, {
       "ruleId" : "AG003",
@@ -1373,26 +1373,13 @@
       "ruleName" : "Service to Controller Inverted Dependency",
       "severity" : "ERROR",
       "sourceClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService",
-      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
-      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7'.",
-      "evidence" : "Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7",
+      "targetClass" : "com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
+      "message" : "Service 'com.example.demo.controllers.ViolatingSecretsAndBloatService' has an inverted dependency on Controller 'com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6'.",
+      "evidence" : "Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6",
       "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingSecretsAndBloatService.java",
-      "fingerprint" : "a4a03da7498e0d9e",
+      "fingerprint" : "90004f5e61b4e098",
       "codeSnippet" : " >    1 | package com.example.demo.controllers;\r\n      2 | \r\n      3 | import org.springframework.stereotype.Service;\r\n      4 | \r\n"
-    }, {
-      "ruleId" : "AG003",
-      "ruleName" : "Service to Controller Inverted Dependency",
-      "severity" : "ERROR",
-      "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
-      "targetClass" : "com.example.demo.controllers.Order",
-      "message" : "Service 'com.example.demo.controllers.ViolatingOrderProcessingService' has an inverted dependency on Controller 'com.example.demo.controllers.Order'.",
-      "evidence" : "Invokes method setStatus on com.example.demo.controllers.Order",
-      "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
-      "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingOrderProcessingService.java",
-      "lineNumber" : 58,
-      "fingerprint" : "81752491891408dc",
-      "codeSnippet" : "     55 |                                         order.setStatus(\"APPROVED_STANDARD\");\r\n     56 |                                         order.setDiscountRate(0.05);\r\n     57 |                                     } else {\r\n >   58 |                                         order.setStatus(\"APPROVED_CONVERTED\");\r\n     59 |                                         order.setDiscountRate(0.02);\r\n     60 |                                     }\r\n     61 |                                 } else if (order.getAmount() > 1000 && maxRetries > 2) {\r\n"
     }, {
       "ruleId" : "AG003",
       "ruleName" : "Service to Controller Inverted Dependency",
@@ -1406,6 +1393,19 @@
       "lineNumber" : 8,
       "fingerprint" : "3a34e92dec805bc4",
       "codeSnippet" : "      5 | @Service\r\n      6 | public class Service2 {\r\n      7 | \tprivate final TestService testService;\r\n >    8 | \tprivate final TestController testController;\r\n      9 | \r\n     10 | \tpublic Service2(TestService testService, TestController testController) {\r\n     11 | \t\tthis.testService = testService;\r\n"
+    }, {
+      "ruleId" : "AG003",
+      "ruleName" : "Service to Controller Inverted Dependency",
+      "severity" : "ERROR",
+      "sourceClass" : "com.example.demo.controllers.ViolatingOrderProcessingService",
+      "targetClass" : "com.example.demo.controllers.Order",
+      "message" : "Service 'com.example.demo.controllers.ViolatingOrderProcessingService' has an inverted dependency on Controller 'com.example.demo.controllers.Order'.",
+      "evidence" : "Invokes method setDiscountRate on com.example.demo.controllers.Order",
+      "remediation" : "Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.",
+      "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingOrderProcessingService.java",
+      "lineNumber" : 56,
+      "fingerprint" : "26c3fa83d65b9a0f",
+      "codeSnippet" : "     53 |                                 } else if (order.getAmount() > 5000) {\r\n     54 |                                     if (currency.equals(\"USD\") || currency.equals(\"EUR\")) {\r\n     55 |                                         order.setStatus(\"APPROVED_STANDARD\");\r\n >   56 |                                         order.setDiscountRate(0.05);\r\n     57 |                                     } else {\r\n     58 |                                         order.setStatus(\"APPROVED_CONVERTED\");\r\n     59 |                                         order.setDiscountRate(0.02);\r\n"
     }, {
       "ruleId" : "AG004",
       "ruleName" : "Repository to Service Inverted Dependency",
@@ -1439,7 +1439,7 @@
       "sourceClass" : "com.example.demo.controllers.ViolatingArchitectureController",
       "message" : "Field injection detected on 'com.example.demo.controllers.ViolatingArchitectureController.autowiredNotificationService' (type: NotificationService) with @Autowired.",
       "evidence" : "@Autowired NotificationService autowiredNotificationService",
-      "remediation" : "Replace @Autowired field with final field and constructor injection (or Lombok @RequiredArgsConstructor).",
+      "remediation" : "Replace @Autowired on 'autowiredNotificationService' with 'private final NotificationService autowiredNotificationService;' and inject via constructor (or annotate class with Lombok @RequiredArgsConstructor).",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingArchitectureController.java",
       "lineNumber" : 19,
       "fingerprint" : "f286c0ce3f73d970"
@@ -1505,7 +1505,7 @@
       "sourceClass" : "com.example.demo.controllers.TestService",
       "message" : "Direct console call 'System.out.println' in method 'anonymous'.",
       "evidence" : "System.out.println(\"TestService: Constructor called\")",
-      "remediation" : "Replace System.out/err/printStackTrace with an SLF4J logger (e.g., private static final Logger log = LoggerFactory.getLogger(...) or Lombok @Slf4j).",
+      "remediation" : "Replace 'System.out.println' with structured logging (e.g., 'private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.TestService.class);' or Lombok @Slf4j).",
       "sourceFile" : "E:\\Booking\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\TestService.java",
       "lineNumber" : 14,
       "fingerprint" : "010746597618b368"
@@ -1963,12 +1963,12 @@
       "fingerprint" : "eaba1a1808e6681c"
     } ],
     "resolvedFingerprints" : [ ],
+    "newCount" : 59,
     "existingCount" : 4,
-    "resolvedCount" : 0,
-    "newCount" : 59
+    "resolvedCount" : 0
   },
-  "totalViolations" : 63,
+  "infoCount" : 0,
   "warningCount" : 29,
-  "errorCount" : 34,
-  "infoCount" : 0
+  "totalViolations" : 63,
+  "errorCount" : 34
 }

@@ -181,11 +181,11 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
   <div class="header">
     <div>
       <h1>🛡️ Java Application Quality Guard</h1>
-      <p style="color:var(--text-muted); margin-top:0.35rem;">Project: <strong style="color:#f1f5f9;">testplugin</strong> (v0.0.1-SNAPSHOT)</p>
+      <p style="color:var(--text-muted); margin-top:0.35rem;">Project: <strong style="color:#f1f5f9;">testplugin</strong> (v0.0.1)</p>
     </div>
     <div class="meta">
       <div>Status: <span class="status-badge status-FAILED_VIOLATIONS">FAILED_VIOLATIONS</span></div>
-      <div style="margin-top:0.3rem;">Generated: 2026-10-11T06:38:57.440438900Z</div>
+      <div style="margin-top:0.3rem;">Generated: 2026-10-11T13:08:49.296576900Z</div>
     </div>
   </div>
   <div class="metrics-grid">
@@ -623,14 +623,14 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
                 <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
                 <div class="source-meta-row">
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.CompliantOrderProcessingService</span>
-                  <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\CompliantOrderProcessingService.java:65</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.CompliantOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\CompliantOrderProcessingService.java:65" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet="     62 |         if (order.getAmount() &gt; 10000 &amp;&amp; ctx.isVip()) {
+                  <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\CompliantOrderProcessingService.java:62</span>
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.CompliantOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\CompliantOrderProcessingService.java:62" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet="     59 |             return;
+     60 |         }
+     61 | 
+ &gt;   62 |         if (order.getAmount() &gt; 10000 &amp;&amp; ctx.isVip()) {
      63 |             order.setStatus(&quot;APPROVED_EXPEDITED&quot;);
      64 |             order.setDiscountRate(0.15);
- &gt;   65 |         } else if (order.getAmount() &gt; 5000) {
-     66 |             order.setStatus(&quot;APPROVED_STANDARD&quot;);
-     67 |             order.setDiscountRate(0.05);
-     68 |         } else {
+     65 |         } else if (order.getAmount() &gt; 5000) {
 ">🔍 View Source Code</button>
                 </div>
               </td>
@@ -670,29 +670,6 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               </td>
               <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
               <td>
-                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6&#39;.</div>
-                <div class="evidence-block">Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6</div>
-                <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
-                <div class="source-meta-row">
-                  <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingSecretsAndBloatService</span>
-                  <span class="location-sub" title="Source File">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
-      2 | 
-      3 | import org.springframework.stereotype.Service;
-      4 | 
-">🔍 View Source Code</button>
-                </div>
-              </td>
-            </tr>
-            <tr class="finding-row row-new" data-rule="AG003" data-severity="ERROR" data-origin="NEW">
-              <td>
-                <div class="badge-group">
-                  <span class="badge badge-ERROR">ERROR</span>
-                  <span class="badge badge-NEW">🚨 NEW</span>
-                </div>
-              </td>
-              <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
-              <td>
                 <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1&#39;.</div>
                 <div class="evidence-block">Field dep1 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep1</div>
                 <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
@@ -716,13 +693,13 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               </td>
               <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
               <td>
-                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2&#39;.</div>
-                <div class="evidence-block">Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2</div>
+                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7&#39;.</div>
+                <div class="evidence-block">Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7</div>
                 <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
                 <div class="source-meta-row">
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingSecretsAndBloatService</span>
                   <span class="location-sub" title="Source File">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
       2 | 
       3 | import org.springframework.stereotype.Service;
       4 | 
@@ -746,6 +723,29 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingSecretsAndBloatService</span>
                   <span class="location-sub" title="Source File">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java</span>
                   <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep4&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
+      2 | 
+      3 | import org.springframework.stereotype.Service;
+      4 | 
+">🔍 View Source Code</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="finding-row row-new" data-rule="AG003" data-severity="ERROR" data-origin="NEW">
+              <td>
+                <div class="badge-group">
+                  <span class="badge badge-ERROR">ERROR</span>
+                  <span class="badge badge-NEW">🚨 NEW</span>
+                </div>
+              </td>
+              <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
+              <td>
+                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2&#39;.</div>
+                <div class="evidence-block">Field dep2 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2</div>
+                <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
+                <div class="source-meta-row">
+                  <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingSecretsAndBloatService</span>
+                  <span class="location-sub" title="Source File">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java</span>
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep2&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
       2 | 
       3 | import org.springframework.stereotype.Service;
       4 | 
@@ -808,13 +808,13 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               </td>
               <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
               <td>
-                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7&#39;.</div>
-                <div class="evidence-block">Field dep7 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7</div>
+                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6&#39;.</div>
+                <div class="evidence-block">Field dep6 of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6; Constructor parameter of type com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6</div>
                 <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
                 <div class="source-meta-row">
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingSecretsAndBloatService</span>
                   <span class="location-sub" title="Source File">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep7&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.ViolatingSecretsAndBloatService$Dep6&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingSecretsAndBloatService.java" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet=" &gt;    1 | package com.example.demo.controllers;
       2 | 
       3 | import org.springframework.stereotype.Service;
       4 | 
@@ -857,32 +857,6 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               </td>
               <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
               <td>
-                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;.</div>
-                <div class="evidence-block">Invokes method setStatus on com.example.demo.controllers.Order</div>
-                <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
-                <div class="source-meta-row">
-                  <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingOrderProcessingService</span>
-                  <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingOrderProcessingService.java:58</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingOrderProcessingService.java:58" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet="     55 |                                         order.setStatus(&quot;APPROVED_STANDARD&quot;);
-     56 |                                         order.setDiscountRate(0.05);
-     57 |                                     } else {
- &gt;   58 |                                         order.setStatus(&quot;APPROVED_CONVERTED&quot;);
-     59 |                                         order.setDiscountRate(0.02);
-     60 |                                     }
-     61 |                                 } else if (order.getAmount() &gt; 1000 &amp;&amp; maxRetries &gt; 2) {
-">🔍 View Source Code</button>
-                </div>
-              </td>
-            </tr>
-            <tr class="finding-row row-new" data-rule="AG003" data-severity="ERROR" data-origin="NEW">
-              <td>
-                <div class="badge-group">
-                  <span class="badge badge-ERROR">ERROR</span>
-                  <span class="badge badge-NEW">🚨 NEW</span>
-                </div>
-              </td>
-              <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
-              <td>
                 <div class="message-title">Service &#39;com.example.demo.controllers.Service2&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.TestController&#39;.</div>
                 <div class="evidence-block">Field testController of type com.example.demo.controllers.TestController; Constructor parameter of type com.example.demo.controllers.TestController</div>
                 <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
@@ -896,6 +870,32 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
       9 | 
      10 | 	public Service2(TestService testService, TestController testController) {
      11 | 		this.testService = testService;
+">🔍 View Source Code</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="finding-row row-new" data-rule="AG003" data-severity="ERROR" data-origin="NEW">
+              <td>
+                <div class="badge-group">
+                  <span class="badge badge-ERROR">ERROR</span>
+                  <span class="badge badge-NEW">🚨 NEW</span>
+                </div>
+              </td>
+              <td><span class="rule-tag" onclick="selectSidebarRule('AG003')" title="Filter by this rule">AG003</span></td>
+              <td>
+                <div class="message-title">Service &#39;com.example.demo.controllers.ViolatingOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;.</div>
+                <div class="evidence-block">Invokes method setDiscountRate on com.example.demo.controllers.Order</div>
+                <div class="remediation-box"><strong>💡 Remediation:</strong> Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead.</div>
+                <div class="source-meta-row">
+                  <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingOrderProcessingService</span>
+                  <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingOrderProcessingService.java:56</span>
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG003" data-rule-name="Service to Controller Inverted Dependency" data-severity="ERROR" data-message="Service &#39;com.example.demo.controllers.ViolatingOrderProcessingService&#39; has an inverted dependency on Controller &#39;com.example.demo.controllers.Order&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingOrderProcessingService.java:56" data-remediation="Refactor service to remove reference to web controller. Pass required parameters or DTOs into service methods instead." data-snippet="     53 |                                 } else if (order.getAmount() &gt; 5000) {
+     54 |                                     if (currency.equals(&quot;USD&quot;) || currency.equals(&quot;EUR&quot;)) {
+     55 |                                         order.setStatus(&quot;APPROVED_STANDARD&quot;);
+ &gt;   56 |                                         order.setDiscountRate(0.05);
+     57 |                                     } else {
+     58 |                                         order.setStatus(&quot;APPROVED_CONVERTED&quot;);
+     59 |                                         order.setDiscountRate(0.02);
 ">🔍 View Source Code</button>
                 </div>
               </td>
@@ -995,11 +995,11 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               <td>
                 <div class="message-title">Field injection detected on &#39;com.example.demo.controllers.ViolatingArchitectureController.autowiredNotificationService&#39; (type: NotificationService) with @Autowired.</div>
                 <div class="evidence-block">@Autowired NotificationService autowiredNotificationService</div>
-                <div class="remediation-box"><strong>💡 Remediation:</strong> Replace @Autowired field with final field and constructor injection (or Lombok @RequiredArgsConstructor).</div>
+                <div class="remediation-box"><strong>💡 Remediation:</strong> Replace @Autowired on &#39;autowiredNotificationService&#39; with &#39;private final NotificationService autowiredNotificationService;&#39; and inject via constructor (or annotate class with Lombok @RequiredArgsConstructor).</div>
                 <div class="source-meta-row">
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.ViolatingArchitectureController</span>
                   <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingArchitectureController.java:19</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG007" data-rule-name="Prohibited Field Injection" data-severity="WARNING" data-message="Field injection detected on &#39;com.example.demo.controllers.ViolatingArchitectureController.autowiredNotificationService&#39; (type: NotificationService) with @Autowired." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingArchitectureController.java:19" data-remediation="Replace @Autowired field with final field and constructor injection (or Lombok @RequiredArgsConstructor)." data-snippet="@Autowired NotificationService autowiredNotificationService">🔍 View Source Code</button>
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG007" data-rule-name="Prohibited Field Injection" data-severity="WARNING" data-message="Field injection detected on &#39;com.example.demo.controllers.ViolatingArchitectureController.autowiredNotificationService&#39; (type: NotificationService) with @Autowired." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\ViolatingArchitectureController.java:19" data-remediation="Replace @Autowired on &#39;autowiredNotificationService&#39; with &#39;private final NotificationService autowiredNotificationService;&#39; and inject via constructor (or annotate class with Lombok @RequiredArgsConstructor)." data-snippet="@Autowired NotificationService autowiredNotificationService">🔍 View Source Code</button>
                 </div>
               </td>
             </tr>
@@ -1147,11 +1147,11 @@ tr.finding-row.row-baselined:hover { opacity: 1.0; }
               <td>
                 <div class="message-title">Direct console call &#39;System.out.println&#39; in method &#39;anonymous&#39;.</div>
                 <div class="evidence-block">System.out.println(&quot;TestService: Constructor called&quot;)</div>
-                <div class="remediation-box"><strong>💡 Remediation:</strong> Replace System.out/err/printStackTrace with an SLF4J logger (e.g., private static final Logger log = LoggerFactory.getLogger(...) or Lombok @Slf4j).</div>
+                <div class="remediation-box"><strong>💡 Remediation:</strong> Replace &#39;System.out.println&#39; with structured logging (e.g., &#39;private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.TestService.class);&#39; or Lombok @Slf4j).</div>
                 <div class="source-meta-row">
                   <span class="class-box" title="Violating Class">📦 com.example.demo.controllers.TestService</span>
                   <span class="location-sub" title="Exact Source Line">📍 E:\Booking\testplugin\src\main\java\com\example\demo\controllers\TestService.java:14</span>
-                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG011" data-rule-name="Direct Console Output (System.out / printStackTrace)" data-severity="WARNING" data-message="Direct console call &#39;System.out.println&#39; in method &#39;anonymous&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\TestService.java:14" data-remediation="Replace System.out/err/printStackTrace with an SLF4J logger (e.g., private static final Logger log = LoggerFactory.getLogger(...) or Lombok @Slf4j)." data-snippet="System.out.println(&quot;TestService: Constructor called&quot;)">🔍 View Source Code</button>
+                  <button class="btn-code" onclick="openCodeModal(this)" data-rule="AG011" data-rule-name="Direct Console Output (System.out / printStackTrace)" data-severity="WARNING" data-message="Direct console call &#39;System.out.println&#39; in method &#39;anonymous&#39;." data-location="E:\Booking\testplugin\src\main\java\com\example\demo\controllers\TestService.java:14" data-remediation="Replace &#39;System.out.println&#39; with structured logging (e.g., &#39;private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.TestService.class);&#39; or Lombok @Slf4j)." data-snippet="System.out.println(&quot;TestService: Constructor called&quot;)">🔍 View Source Code</button>
                 </div>
               </td>
             </tr>
@@ -2190,7 +2190,7 @@ public void processOrderBatch(List&lt;String&gt; orderIds) {
     </div>
   </div>
   <div class="footer">
-    Java Application Quality Guard v1.0.0 &bull; Execution time: 729ms
+    Java Application Quality Guard v1.0.0 &bull; Execution time: 834ms
   </div>
 </div>
 <script>
