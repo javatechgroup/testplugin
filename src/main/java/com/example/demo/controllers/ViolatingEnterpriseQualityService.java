@@ -92,4 +92,41 @@ public class ViolatingEnterpriseQualityService {
         }
         return csvReport;
     }
+
+    // =========================================================================
+    // AG026: Remote I/O Inside @Transactional Boundary (HikariCP Starvation)
+    // =========================================================================
+    @Transactional
+    public void executeRemotePaymentInTransaction(java.net.URI endpoint) throws Exception {
+        // Remote HTTP call inside @Transactional locks DB connection while waiting for network!
+        java.net.http.HttpClient httpClient = java.net.http.HttpClient.newHttpClient();
+        java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder().uri(endpoint).build();
+        httpClient.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
+    }
+
+    // =========================================================================
+    // AG027: Java 21 Virtual Thread Pinning (synchronized method and block)
+    // =========================================================================
+    public synchronized String getCachedExchangeRateSyncMethod(String currency) {
+        // Synchronized method pins OS carrier thread in Project Loom
+        return "1.25";
+    }
+
+    public void processCriticalTransactionBlock(String txId) {
+        // Synchronized block pins OS carrier thread in Project Loom
+        synchronized (this) {
+            processedOrderCounter++;
+        }
+    }
+
+    // =========================================================================
+    // AG028: ThreadLocal Memory Leak & Context Contamination
+    // =========================================================================
+    private static final ThreadLocal<String> userSecurityContext = new ThreadLocal<>();
+
+    public void processUserRequestWithLeak(String userId) {
+        // Leaks into worker thread pool because remove() is never called in finally block!
+        userSecurityContext.set(userId);
+        processedOrderCounter++;
+    }
 }
