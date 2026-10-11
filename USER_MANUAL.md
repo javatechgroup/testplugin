@@ -66,7 +66,7 @@ flowchart TD
 Run the `init` mojo directly in your project root to auto-detect base packages and scaffold a production-ready `archguard.yml`:
 
 ```bash
-mvn com.architectureguard:architecture-guard-maven-plugin:1.0.0-SNAPSHOT:init
+mvn com.architectureguard:architecture-guard-maven-plugin:1.0.0:init
 ```
 
 ### Option B: Manual Setup
@@ -79,7 +79,7 @@ Add the `architecture-guard-maven-plugin` to your project's `<build><plugins>` s
         <plugin>
             <groupId>com.architectureguard</groupId>
             <artifactId>architecture-guard-maven-plugin</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
             <executions>
                 <execution>
                     <goals>
