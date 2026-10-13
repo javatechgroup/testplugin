@@ -67,24 +67,31 @@ ArchGuard executes directly in the Maven `verify` lifecycle in milliseconds with
 
 ```mermaid
 flowchart TD
+    classDef inputNode fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    classDef engineNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
+    classDef govNode fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#b45309;
+    classDef outNode fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#7e22ce;
+    classDef passNode fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d;
+    classDef failNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#991b1b;
+
     subgraph Input["Your Java 21+ Project"]
-        SRC["Java Source Code (.java)"]
-        CLS["Compiled Bytecode (.class)"]
+        SRC["Java Source Code (.java)"]:::inputNode
+        CLS["Compiled Bytecode (.class)"]:::inputNode
     end
 
     subgraph DualEngine["ArchGuard Dual-Engine Analyzer"]
-        AST["JavaParser AST Engine\n• Semantic Code Smells\n• Spring Annotations\n• Secrets & Exception Hygiene"]
-        ASM["ASM High-Speed Bytecode Engine\n• Layer Dependency Hierarchy\n• Cyclic Graphs (Tarjan's SCC)\n• Type & Call Graph Resolution"]
+        AST["JavaParser AST Engine\n• Semantic Code Smells\n• Spring Annotations\n• Secrets & Exception Hygiene"]:::engineNode
+        ASM["ASM High-Speed Bytecode Engine\n• Layer Dependency Hierarchy\n• Cyclic Graphs (Tarjan's SCC)\n• Type & Call Graph Resolution"]:::engineNode
     end
 
     subgraph Governance["Governance & Baselining Gate"]
-        DIFF["Differential Snapshot Engine\n(.architecture-guard-baseline.json)\n• Track SHA-256 Fingerprints\n• Multiset Frequency Protection\n• Auto-Ratcheting (Debt Shrinker)"]
+        DIFF["Differential Snapshot Engine\n(.architecture-guard-baseline.json)\n• Track SHA-256 Fingerprints\n• Multiset Frequency Protection\n• Auto-Ratcheting (Debt Shrinker)"]:::govNode
     end
 
     subgraph Output["Zero-Infrastructure Outputs"]
-        HTML["Interactive HTML Dashboard\n(PR Delta / Baselined / All Code)"]
-        SARIF["OASIS SARIF 2.1.0\n(GitHub PR Annotations & Security Tab)"]
-        GATE{"Quality Gate Threshold\n(failOnSeverity = ERROR)"}
+        HTML["Interactive HTML Dashboard\n(PR Delta / Baselined / All Code)"]:::outNode
+        SARIF["OASIS SARIF 2.1.0\n(GitHub PR Annotations & Security Tab)"]:::outNode
+        GATE{"Quality Gate Threshold\n(failOnSeverity = ERROR)"}:::govNode
     end
 
     SRC --> AST
@@ -94,8 +101,8 @@ flowchart TD
     DIFF --> HTML
     DIFF --> SARIF
     DIFF --> GATE
-    GATE -->|New Violations Found| FAIL["❌ BUILD FAILED"]
-    GATE -->|Clean PR Delta| PASS["✅ BUILD SUCCESS"]
+    GATE -->|New Violations Found| FAIL["❌ BUILD FAILED"]:::failNode
+    GATE -->|Clean PR Delta| PASS["✅ BUILD SUCCESS"]:::passNode
 ```
 
 ---
@@ -234,7 +241,7 @@ ArchGuard is a **static analysis code gate**, not a runtime JVM profiler:
 | Capability / Feature | 🛡️ **ArchGuard** | 🏢 **SonarQube** | 📐 **ArchUnit** | 🐛 **SpotBugs** | 🎨 **Checkstyle / PMD** |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Server / Cloud Infrastructure** | **None (100% Embedded)** | Heavy Server + DB | None (JUnit tests) | None (Plugin) | None (Plugin) |
-| **Execution Speed** | **< 3 seconds** | Minutes (Remote queue) | Test suite overhead | Fast | Fast |
+| **Execution Speed** | **~2–7 seconds (In-Process)** | Minutes (Server queue + DB) | Test suite overhead | Fast (~5–15s) | Fast (~5–10s) |
 | **Cost & Licensing** | **100% Free & Open Source** | Expensive Enterprise Tier | Free & Open Source | Free & Open Source | Free & Open Source |
 | **Spring Proxy Self-Invocation (`AG021`)** | ✅ **Built-in Native** | ❌ None | ⚠️ Custom test code | ❌ None | ❌ None |
 | **Spring Singleton Race Conditions (`AG022`)**| ✅ **Built-in Native** | ⚠️ Static only | ⚠️ Custom test code | ⚠️ Static only | ❌ None |
@@ -247,7 +254,7 @@ ArchGuard is a **static analysis code gate**, not a runtime JVM profiler:
 | **Automatic Debt Ratcheting** | ✅ **Built-in Mode** | ❌ Manual tuning | ❌ None | ❌ None | ❌ None |
 | **Interactive Offline HTML Dashboard** | ✅ **Included (Zero CDN)**| ❌ Web server only | ❌ None | ⚠️ Basic static | ⚠️ Basic static |
 | **GitHub Security / SARIF 2.1.0** | ✅ **Native Output** | ⚠️ Plugin / Action | ❌ None | ⚠️ Via plugin | ⚠️ Via plugin |
-| **Setup Time** | **60 Seconds (`init`)** | Hours / Days | Hours writing tests | 10 Minutes | 10 Minutes |
+| **Setup Time** | **< 60 Seconds (Zero-Config)** | Hours / Days | Hours writing tests | 10 Minutes | 10 Minutes |
 
 ---
 
@@ -259,10 +266,10 @@ ArchGuard is a **static analysis code gate**, not a runtime JVM profiler:
 | :--- | :--- | :--- |
 | **Infrastructure Overhead** | **Zero.** Executes directly inside your Maven build. No Docker containers, no PostgreSQL instance, no webhook management. | **High.** Requires provisioning and maintaining an application server, dedicated database, network firewalls, and tokens. |
 | **Spring Boot Awareness** | **Engineered for Spring Boot 3+.** Understands proxy boundaries, singleton thread hazards, `@Transactional` boundaries, and REST best practices. | **Generic Java.** Treats Spring like any plain Java code. Completely misses proxy self-invocation and REST entity exposure. |
-| **Feedback Loop Speed** | **Immediate.** Feedback delivered in your local terminal during `mvn verify` in 2 seconds. | **Delayed.** Code is uploaded to server; developers wait for worker analysis and check results on external web dashboard. |
+| **Feedback Loop Speed** | **Immediate (Shift-Left).** Delivered in-process in your local terminal during `mvn verify` in ~2–7 seconds. | **Asynchronous.** Code bundle uploaded to server; results available after server worker queue processing and DB indexing. |
 | **Cost & PR Decoration** | **100% Free.** Generates SARIF 2.1.0 reports that natively decorate PR lines in GitHub Actions for free. | **Paywalled.** Pull request decoration and branch analysis are locked behind paid Developer/Enterprise editions. |
 
-> **Verdict:** Use **ArchGuard** as your zero-friction, Spring-intelligent gatekeeper directly in PR pipelines. Use SonarQube for broad multi-language portfolio tracking if you already have the infrastructure.
+> **Verdict:** Use **ArchGuard** as your zero-friction, Spring-intelligent gatekeeper directly in local builds and PR pipelines (shift-left). Use SonarQube for broad multi-language portfolio tracking and enterprise reporting if you already host the centralized infrastructure.
 
 ---
 
@@ -270,7 +277,7 @@ ArchGuard is a **static analysis code gate**, not a runtime JVM profiler:
 
 | Comparison Vector | 🛡️ ArchGuard | 📐 ArchUnit |
 | :--- | :--- | :--- |
-| **Configuration vs Coding** | **Declarative.** Run `mvn architecture-guard:init` and customize a simple `archguard.yml`. Zero Java code needed. | **Programmatic.** Developers must write, compile, and maintain verbose JUnit unit tests (`classes().that().resideInAPackage()...`). |
+| **Configuration vs Coding** | **Zero-Config & Declarative.** Works out of the box with zero files. Optional `archguard.yml` (via `mvn architecture-guard:init`) for custom overrides. Zero test code needed. | **Programmatic.** Developers must write, compile, and maintain verbose JUnit unit tests (`classes().that().resideInAPackage()...`). |
 | **Legacy Technical Debt** | **Built-in Ratchet Engine.** Freeze legacy debt with `mvn architecture-guard:baseline` in 1 second. | **No native baseline.** Teams must either fix all legacy violations before adding a rule or write complex custom ignore logic. |
 | **Rule Breadth** | Covers architecture, Spring runtime traps, clean code metrics, secrets, and performance anti-patterns out of the box. | Strictly limited to architectural dependency and reflection assertions. |
 | **Reporting & Dashboards** | Rich interactive HTML dashboard + SARIF 2.1.0 export. | Standard JUnit assertion failure messages in unit test logs. |
@@ -346,8 +353,12 @@ Every rule includes automated diagnostic detection, exact line numbers, and acti
 
 ### 📊 1. Interactive Offline HTML Dashboard
 Generated at `target/architecture-guard/report.html`:
-- **Self-Contained & Zero CDN:** Renders completely offline inside air-gapped enterprise environments.
-- **Dynamic Scope Filters:** Toggle between **PR Delta** (new violations only), **Baselined Debt**, and **All Code** with instant metric updates.
+- **Self-Contained & Zero CDN:** 100% standalone single-file HTML report with embedded CSS/JS that renders completely offline inside air-gapped enterprise environments.
+- **Rule Sidebar "Issues Only" Toggle:** Reviewers can toggle between **`⚠️ Issues Only`** (shows only the subset of rules with active findings) and **`All Rules`** (full 29-rule catalog), with live rule search.
+- **Auditable Suppressed Scope:** Dedicated **`🛡️ Suppressed (N)`** tab displays code-suppressed violations with distinct **`🛡️ SUPPRESSED IN CODE`** badges without polluting the active quality gate numbers.
+- **One-Click IDE Deep Links:** Normalized links (`vscode://file/...` and `idea://open?file=...`) open the exact file and line directly in VS Code or IntelliJ IDEA on Windows, macOS, and Linux.
+- **Zero-Results Filter Empty State:** When filter combinations yield zero hits, a clean feedback box with **`↺ Reset All Filters`** restores the view instantly.
+- **Dynamic Scope Filters:** Toggle between **Active**, **PR Delta** (new violations only), **Baselined Debt**, and **Suppressed** with instant metric updates.
 - **Actionable Remediation Cards:** Every violation displays the exact file, line number, offending code snippet, and copyable remediation guidance.
 - **Dark / Light Theme:** Seamless toggle with persistent local preference.
 
@@ -365,51 +376,85 @@ Upload standard OASIS SARIF 2.1.0 in just 3 lines of YAML:
 - **Inline Code Comments:** GitHub automatically places red warnings and error annotations on the exact lines of code modified in the Pull Request.
 - **Security Dashboard:** Violations appear natively under the **Security → Code Scanning alerts** tab.
 
-### 🏷️ 3. Explicit In-Code Suppressions
-Suppress intentional exceptions with mandatory audit justification:
+### 🏷️ 3. Auditable In-Code Suppressions (Method & Class Level)
+Suppress intentional architecture exceptions using either standard Java `@SuppressWarnings` or `@SuppressArchitecture`. Suppressed violations **do not break CI builds**, but remain 100% visible and auditable under the `🛡️ Suppressed` dashboard tab:
 
 ```java
-@Service
-public class LegacyExportService {
+// Method-Level Targeted Suppression (Recommended)
+@SuppressWarnings({"archguard:AG018", "archguard:AG020"})
+public void legacyBatchProcess() { ... }
 
-    @SuppressArchitecture(
-        rule = "AG024",
-        reason = "Resource lifecycle is managed externally by Spring Batch framework"
-    )
-    public void executeExport() { ... }
-}
+// Method-Level Blanket Suppression (All ArchGuard Rules)
+@SuppressWarnings("archguard")
+public void uninspectedLegacyMethod() { ... }
+
+// Class-Level Suppression with Audit Rationale
+@SuppressArchitecture(
+    rule = "AG024",
+    reason = "Resource lifecycle is managed externally by Spring Batch framework"
+)
+public class LegacyExportService { ... }
 ```
+
+### 📦 4. Multi-Module Reactor & Parent POM Support
+- **Upward Config Discovery:** Child submodules automatically walk up the directory tree (up to 4 levels) to discover the root `archguard.yml`, eliminating config duplication.
+- **Aggregator Clean Skip:** Modules with `<packaging>pom</packaging>` are skipped cleanly without false warnings about missing `target/classes`.
 
 ---
 
 ## 9. Enterprise Scalability & Performance Benchmarks
 
-In enterprise CI/CD pipelines, build speed is paramount. Slow quality gates frustrate developers and cause teams to disable tooling. ArchGuard is engineered from the ground up for sub-second to low-single-digit execution times, even on massive codebases.
+In enterprise CI/CD pipelines, build speed directly impacts developer flow. Lengthy verification phases introduce pipeline friction and frequently cause engineering teams to disable quality gates. ArchGuard is architected from the ground up to minimize CI overhead, operating in-process within the standard Maven build lifecycle.
 
-### ⏱️ Latency Benchmark: 1,000+ Classes (~250,000 LOC)
-*Benchmarked on an 8-core developer workstation / standard 2-vCPU CI runner:*
+### ⏱️ Indicative Performance Profile: 1,000 Classes (~250,000 LOC)
+*Representative timings observed on an 8-core developer workstation / standard 2-vCPU CI runner with SSD storage:*
 
-| Analysis Phase | Underlying Engine | Latency (1,000 Classes) | Algorithmic Complexity |
-| :--- | :--- | :---: | :---: |
-| **Bytecode Ingestion & Hierarchy** | **ASM / ArchUnit** | **~1.5 – 2.5s** | $O(N)$ single-pass bytecode parse |
-| **Semantic Source AST Inspection** | **JavaParser AST** | **~2.5 – 4.5s** | $O(N)$ streaming visitor |
-| **Cyclic Dependency Resolution** | **Tarjan's SCC Graph** | **< 50ms** | $O(V + E)$ strictly linear |
-| **29 Quality & Spring Rules** | **ArchGuard Core** | **~150ms** | In-memory lookup tables |
-| **Differential Baseline & Ratchet** | **SHA-256 Multiset Engine** | **< 50ms** | $O(V)$ hash map comparison |
-| **Report Generation (HTML & SARIF)**| **Offline File Exporter** | **~200ms** | Direct streaming file write |
-| **Total Wall-Clock Analysis Time** | | **~4.5 – 7.5 seconds** | ⚡ **Negligible CI overhead** |
+| Analysis Phase | Underlying Engine | Latency (1,000 Classes) | Algorithmic Complexity | Engineering Design Note |
+| :--- | :--- | :---: | :---: | :--- |
+| **Bytecode Ingestion & Hierarchy** | **ASM / ArchUnit** | **~1.5 – 2.5s** | $O(N)$ | Single-pass bytecode parsing across compiled `.class` files |
+| **Semantic Source AST Inspection** | **JavaParser AST** | **~2.5 – 4.5s** | $O(N)$ | Streaming file-by-file visitor with immediate AST deallocation |
+| **Cyclic Dependency Resolution** | **Tarjan's SCC Graph** | **< 50ms** | $O(V + E)$ | Strictly linear strongly-connected-components traversal |
+| **29 Quality & Spring Rules** | **ArchGuard Core** | **~150ms** | $O(1)$ lookups | In-memory evaluation over pre-computed type & AST metadata |
+| **Differential Baseline & Ratchet** | **SHA-256 Multiset Engine** | **< 50ms** | $O(V)$ | Streaming hash-map fingerprint comparison against baseline snapshot |
+| **Report Generation (HTML & SARIF)**| **Offline File Exporter** | **~200ms** | $O(V)$ | Direct streaming local file serialization (zero external HTTP calls) |
+| **Total Wall-Clock Analysis Time** | | **~4.5 – 7.5 seconds** | — | ⚡ **Sub-10s turnaround in typical pull-request workflows** |
 
-### 📊 Industry Head-to-Head Speed Comparison (1,000 Classes)
+> [!NOTE]
+> **Benchmark Variability:** Actual execution durations depend on CPU core count, disk I/O throughput (SSD vs. networked CI volume), JVM warmup state, and repository size. For microservices (< 300 classes), execution typically completes in under 2 seconds.
+
+---
+
+### 📊 Architectural Comparison: Local In-Process Gate vs. Centralized Platforms
+
+Static analysis tools serve distinct architectural roles across the software lifecycle. Below is a representative comparison of typical wall-clock turnaround times experienced by developers during pull request verification:
 
 ```
-Scan Time Comparison (1,000 Classes)
-─────────────────────────────────────────────────────────────
-ArchGuard          ██ 5.5s
-PMD / Checkstyle   ███ 8.0s
-SpotBugs           ███████ 22.0s
-SonarQube          ██████████████████████████████ 180.0s (3m)
-─────────────────────────────────────────────────────────────
+Representative CI Feedback Turnaround (1,000 Classes, Standard CI Runner)
+─────────────────────────────────────────────────────────────────────────────
+ArchGuard (In-Process Maven Gate)        ██ 5.5s
+PMD / Checkstyle (Local Source Linter)   ███ 8.0s
+SpotBugs (Local Bytecode Analyzer)       ███████ 22.0s
+Centralized Server Platform (SonarQube)*  ██████████████████████████████ ~180s (3m)
+─────────────────────────────────────────────────────────────────────────────
+*Note: Representative end-to-end turnaround including artifact bundling, network transfer,
+worker queue scheduling, and centralized server-side database persistence.
 ```
+
+#### 🔍 Benchmark Methodology & Architectural Context
+
+When evaluating performance across analysis tools, it is essential to consider differences in architecture and execution scope:
+
+1. **Why ArchGuard Operates in Low Single-Digit Seconds:**
+   - **Zero-Network, In-Process Execution:** ArchGuard executes directly inside the local JVM process of `mvn verify`. There are no external HTTP transfers, no remote webhook handshakes, and no database roundtrips.
+   - **Targeted Spring & Architectural Rules:** Rather than running hundreds of generic AST queries, ArchGuard focuses specifically on architectural boundaries, Spring runtime traps, and high-risk concurrency/resource hazards.
+   - **Streaming AST Lifecycle:** Source files are parsed, evaluated, and immediately dereferenced for garbage collection, avoiding cumulative AST graph heap bloat.
+
+2. **Context on Centralized Platforms (e.g., SonarQube):**
+   - Centralized platforms are designed for comprehensive cross-repository portfolio management, historical tracking, multi-language coverage, and centralized rule administration.
+   - Their longer end-to-end turnaround is primarily driven by operational scope: uploading source bundles to a central server, awaiting worker queue capacity, executing server-side analysis workers, and writing metrics to relational databases.
+   - **Recommended Synergy:** ArchGuard is designed to complement existing centralized suites by acting as an **immediate, zero-cost shift-left quality gate** directly in developer terminals and pull request pipelines—providing sub-10s feedback before code ever reaches centralized scanners.
+
+---
 
 ### 🧠 Zero-OOM Memory Safety (Heap Footprint)
 Enterprise pipelines often fail with `java.lang.OutOfMemoryError` when linters retain massive syntax trees in memory:
@@ -421,14 +466,11 @@ Enterprise pipelines often fail with `java.lang.OutOfMemoryError` when linters r
 
 ## 10. Get Started in Under 60 Seconds
 
-### Step 1: Initialize Configuration
-Run the interactive scaffolding tool in your project root to auto-detect base packages:
+ArchGuard embraces a **Zero-Configuration** philosophy. It runs directly within your Maven build without requiring any configuration files, external daemons, or cloud tokens.
 
-```bash
-mvn com.architectureguard:architecture-guard-maven-plugin:1.0.0:init
-```
+### Step 1: Add ArchGuard to `pom.xml` (Required)
+Add the plugin to your project's `<build><plugins>` section. By default, all 29 rules are active and layers are auto-classified via Spring annotations:
 
-### Step 2: Add Maven Plugin to `pom.xml`
 ```xml
 <plugin>
     <groupId>com.architectureguard</groupId>
@@ -447,15 +489,31 @@ mvn com.architectureguard:architecture-guard-maven-plugin:1.0.0:init
 </plugin>
 ```
 
-### Step 3: Freeze Legacy Debt (For Existing Projects)
+### Step 2: Freeze Legacy Debt (For Existing Projects)
+If introducing ArchGuard into a large, existing codebase with legacy violations, freeze them immediately so existing debt never breaks the build:
+
 ```bash
 mvn architecture-guard:baseline
 ```
+*(Creates `.architecture-guard-baseline.json`. Only newly introduced violations in upcoming commits will fail the build).*
 
-### Step 4: Run Analysis & Enforce Quality Gate
+### Step 3: Run Analysis & Enforce Quality Gate
 ```bash
 mvn clean verify
 ```
+Reports are automatically generated offline in `target/architecture-guard/`:
+- **`architecture-guard-report.html`**: Interactive self-contained developer dashboard
+- **`report.sarif`**: Native OASIS SARIF 2.1.0 report for GitHub/GitLab PR scanning
+
+---
+
+### 💡 (Optional) Scaffold Custom Configuration (`archguard.yml`)
+If your project uses non-standard architecture (e.g. Hexagonal / Clean Architecture) or you want to customize thresholds and rule severities, scaffold an initial configuration file:
+
+```bash
+mvn architecture-guard:init
+```
+*(Auto-detects your base package and writes a commented `archguard.yml` to your project root).*
 
 ---
 

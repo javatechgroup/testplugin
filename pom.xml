@@ -15,6 +15,7 @@
 	<name>testplugin</name>
 
 	<properties>
+		<architecture-guard-maven-plugin-artifactId>architecture-guard-maven-plugin</architecture-guard-maven-plugin-artifactId>
 		<java.version>21</java.version>
 	</properties>
 
@@ -66,7 +67,7 @@
 
 			<plugin>
 				<groupId>com.architectureguard</groupId>
-				<artifactId>architecture-guard-maven-plugin</artifactId>
+				<artifactId>${architecture-guard-maven-plugin-artifactId}</artifactId>
 				<version>1.0.0</version>
 				<executions>
 					<execution>

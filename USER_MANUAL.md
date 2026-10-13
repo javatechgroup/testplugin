@@ -31,21 +31,28 @@ Unlike traditional linters that only inspect syntax or basic code smells, ArchGu
 
 ```mermaid
 flowchart TD
-    A["Java 21 Source (.java)"] -->|javac| B["Compiled Classes (.class)"]
-    A --> C["AST Source Analyzer (JavaParser)"]
-    B --> D["Bytecode Analyzer (ASM)"]
-    C --> E["ArchGuard Engine"]
+    classDef inputNode fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0369a1;
+    classDef engineNode fill:#f0fdf4,stroke:#16a34a,stroke-width:2px,color:#15803d;
+    classDef govNode fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#b45309;
+    classDef reportNode fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#7e22ce;
+    classDef passNode fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#15803d;
+    classDef failNode fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#991b1b;
+
+    A["Java 21 Source (.java)"]:::inputNode -->|javac| B["Compiled Classes (.class)"]:::inputNode
+    A --> C["AST Source Analyzer (JavaParser)"]:::engineNode
+    B --> D["Bytecode Analyzer (ASM)"]:::engineNode
+    C --> E["ArchGuard Engine"]:::engineNode
     D --> E
-    E --> F{"Baseline Snapshot (.json) Present?"}
-    F -->|Yes| G["Multiset Differential Engine\n(NEW vs BASELINED vs RESOLVED)"]
-    F -->|No| H["All Violations Evaluated"]
-    G --> I{"New Violations >= failOnSeverity?"}
-    H --> J{"Total Violations >= failOnSeverity?"}
-    I -->|Yes| K["BUILD FAILURE ❌"]
-    I -->|No| L["BUILD SUCCESS ✅"]
+    E --> F{"Baseline Snapshot (.json) Present?"}:::govNode
+    F -->|Yes| G["Multiset Differential Engine\n(NEW vs BASELINED vs RESOLVED)"]:::govNode
+    F -->|No| H["All Violations Evaluated"]:::govNode
+    G --> I{"New Violations >= failOnSeverity?"}:::govNode
+    H --> J{"Total Violations >= failOnSeverity?"}:::govNode
+    I -->|Yes| K["BUILD FAILURE ❌"]:::failNode
+    I -->|No| L["BUILD SUCCESS ✅"]:::passNode
     J -->|Yes| K
     J -->|No| L
-    G --> M["HTML / JSON / Console Reports"]
+    G --> M["HTML / JSON / Console Reports"]:::reportNode
     H --> M
 ```
 
@@ -61,17 +68,11 @@ flowchart TD
 
 ## 3. Quick Start Guide
 
-### Option A: Interactive Quickstart (Recommended)
+ArchGuard operates on a **Zero-Configuration** philosophy: once declared in your `pom.xml`, it evaluates all 29 rules, auto-detects Spring/JPA layers, and generates HTML & SARIF reports without requiring any external configuration files.
 
-Run the `init` mojo directly in your project root to auto-detect base packages and scaffold a production-ready `archguard.yml`:
+### Step 1: Add the Maven Plugin to `pom.xml` (Required)
 
-```bash
-mvn com.architectureguard:architecture-guard-maven-plugin:1.0.0:init
-```
-
-### Option B: Manual Setup
-
-Add the `architecture-guard-maven-plugin` to your project's `<build><plugins>` section in `pom.xml`:
+Add `architecture-guard-maven-plugin` to your project's `<build><plugins>` section:
 
 ```xml
 <build>
@@ -97,13 +98,33 @@ Add the `architecture-guard-maven-plugin` to your project's `<build><plugins>` s
 </build>
 ```
 
-### Step 2: Run Analysis
+### Step 2: (For Existing Projects) Freeze Legacy Debt
+
+If adopting ArchGuard on an existing project, freeze pre-existing violations into a baseline so legacy code never blocks your build:
+
+```bash
+mvn architecture-guard:baseline
+```
+*(Creates `.architecture-guard-baseline.json`. Only newly introduced violations in upcoming pull requests will fail the build).*
+
+### Step 3: Run Analysis & Enforce Quality Gate
 
 ```bash
 mvn clean verify
 ```
 
-ArchGuard will compile your classes, evaluate all 25 architecture and quality rules, generate offline interactive HTML, JSON, and standard SARIF 2.1.0 reports, and fail the build if violations at or above the threshold are detected.
+ArchGuard will compile your classes, evaluate all 29 architecture and quality rules, generate offline interactive HTML, JSON, and standard SARIF 2.1.0 reports in `target/architecture-guard/`, and fail the build if violations at or above the threshold are detected.
+
+---
+
+### 💡 (Optional) Scaffold Custom Configuration (`archguard.yml`)
+
+If your project requires non-standard layer package patterns (e.g., Hexagonal ports & adapters), customized rule severities, or package boundary policies, generate a starter configuration file using:
+
+```bash
+mvn architecture-guard:init
+```
+*(Auto-detects base packages and writes a commented `archguard.yml` in your project root).*
 
 ---
 
@@ -125,32 +146,41 @@ ArchGuard will compile your classes, evaluate all 25 architecture and quality ru
 
 ## 5. Core Commands & Execution
 
-### 1. Initialize ArchGuard in Any Project
-Auto-detects base packages and creates `archguard.yml`:
+### 1. Run Standard Quality Gate
+Runs the analysis during the `verify` lifecycle phase (recommended in CI):
 ```bash
-mvn architecture-guard:init
+mvn clean verify
 ```
-
-### 2. Run Standard Quality Gate
-Runs the analysis during the `verify` phase (or manually):
+Or run the plugin goal directly:
 ```bash
 mvn clean compile architecture-guard:check
 ```
 
-### 3. Generate a Baseline Snapshot for Existing Projects
+### 2. Generate Baseline Snapshot for Legacy Projects
 Freezes all current project debt into `.architecture-guard-baseline.json`:
 ```bash
-mvn clean compile architecture-guard:baseline
+mvn architecture-guard:baseline
 ```
 
-### 4. Run with Ratchet Mode Enabled
-Ensures baseline shrinks automatically as developers fix old violations:
+### 3. Run with Ratchet Mode Enabled
+Ensures the baseline shrinks automatically as developers fix old violations:
 ```bash
 mvn clean verify -Darchguard.ratchet=true
 ```
 
-### 5. Enforce Strict Warning Failures
-Fails the build if any new `WARNING` (such as `System.out.println` or `@Autowired`) is added:
+### 4. (Optional) Scaffold Starter Configuration
+Auto-detects base packages and creates a commented `archguard.yml`:
+```bash
+mvn architecture-guard:init
+```
+
+### 5. Multi-Module Project Support
+ArchGuard natively supports Maven multi-module aggregator builds:
+- **Clean POM Packaging Skip:** Parent and aggregator modules (`<packaging>pom</packaging>`) are automatically skipped with an informational log (`Skipping pom packaging module`) without raising false warnings about missing `target/classes`.
+- **Reactor Execution:** Running `mvn clean verify` at the root reactor runs ArchGuard across each artifact-producing submodule cleanly.
+
+### 6. Enforce Strict Warning Failures
+Fails the build if any new `WARNING` (such as `System.out.println` or field `@Autowired`) is added:
 ```bash
 mvn clean verify -Darchguard.failOnSeverity=WARNING
 ```
@@ -182,7 +212,7 @@ Enable `<ratchet>true</ratchet>` or `-Darchguard.ratchet=true`. Whenever a devel
 
 ---
 
-## 7. Comprehensive Rule Catalog (AG001 – AG027)
+## 7. Comprehensive Rule Catalog (AG001 – AG029)
 
 ### [AG001] Controller to Repository Direct Dependency
 - **Severity:** `ERROR`
@@ -837,20 +867,69 @@ public class OrderPersistenceService {
 
 ## 8. In-Code Rule Suppressions
 
-ArchGuard supports fine-grained in-code suppressions on classes and methods when intentional exceptions must be documented in code:
+ArchGuard supports fine-grained, auditable in-code suppressions on **classes** and **methods** when intentional architectural exceptions must be documented in code.
 
-### 1. Dedicated `@SuppressArchitecture` Annotation
+### Auditable Quality Gate Semantics
+- **Quality Gate (CI/CD)**: In-code suppressions **do not fail the build** (`mvn verify` succeeds) and do not degrade the module health score.
+- **Architectural Auditability**: Suppressed violations are **not hidden or silently swallowed**. They remain fully visible in `architecture-guard-report.html` under the dedicated **`🛡️ Suppressed (N)`** scope tab, marked with **`🛡️ SUPPRESSED IN CODE`** badges, allowing architects and lead reviewers to audit intentional technical debt easily.
+
+---
+
+### 1. Standard Java `@SuppressWarnings` *(Recommended)*
+
+No external dependencies or imports needed. ArchGuard parses standard `@SuppressWarnings` annotations directly via AST source inspection.
+
+#### Method-Level Suppression (Best Practice)
+Target specific methods to avoid blinding other methods in the same class:
+
+```java
+// Suppress a single rule on a method
+@SuppressWarnings("archguard:AG020")
+public void complexLegacyMethod() { ... }
+
+// Suppress multiple specific rules on a method
+@SuppressWarnings({"archguard:AG018", "archguard:AG019", "archguard:AG020"})
+public void processOrderBatch(...) { ... }
+
+// Blanket suppression: suppress ALL ArchGuard rules on this method
+@SuppressWarnings("archguard")
+public void legacyBatchImport() { ... }
+```
+
+#### Class-Level Suppression
+Suppresses matching rules across the entire class:
+
+```java
+// Suppress a specific rule across the class
+@SuppressWarnings("archguard:AG001")
+public class LegacyOrderController { ... }
+
+// Suppress multiple rules across the class
+@SuppressWarnings({"archguard:AG007", "archguard:AG011"})
+public class InternalDiagnosticService { ... }
+
+// Blanket suppression: suppress ALL ArchGuard rules for this class
+@SuppressWarnings("archguard")
+public class ThirdPartyGeneratedBridge { ... }
+```
+
+---
+
+### 2. Dedicated `@SuppressArchitecture` Annotation
+
+When using `architecture-guard-core` directly, you can document the architectural rationale explicitly using `@SuppressArchitecture`:
+
 ```java
 import com.architectureguard.core.annotation.SuppressArchitecture;
 
-// Suppress specific rule
+// Suppress specific rule with mandatory audit rationale
 @SuppressArchitecture(rule = "AG001", reason = "Legacy adapter requires direct repo access until v2 migration")
 public class LegacyOrderController {
     // ...
 }
 
-// Suppress multiple rules
-@SuppressArchitecture(rules = {"AG007", "AG011"}, reason = "CLI debugging tool")
+// Suppress multiple rules on class or method
+@SuppressArchitecture(rules = {"AG007", "AG011"}, reason = "CLI debugging tool requires field injection and console output")
 public class InternalDiagnosticService {
     // ...
 }
@@ -862,52 +941,150 @@ public class ThirdPartyGeneratedBridge {
 }
 ```
 
-### 2. Standard Java `@SuppressWarnings`
-```java
-@SuppressWarnings("archguard:AG001")
-public class LegacyPaymentGateway {
-    // ...
-}
-```
-
 ---
 
 ## 9. Configuration File Reference (`archguard.yml`)
 
-You can place an `archguard.yml` or `architecture-guard.json` file in your project root to customize layer package conventions, rule severities, thresholds, and exclusions:
+ArchGuard embraces a **Zero-Configuration** philosophy: if no configuration file exists, it runs with sensible defaults (all 29 rules active, Spring/JPA stereotype layer detection, and default reporting).
+
+When your team needs to **customize** architectural rules, tweak thresholds, map non-standard layer packages, or enforce strict package boundaries, you can add an `archguard.yml` file to your project root.
+
+---
+
+### How to Generate `archguard.yml`
+You can create the file manually or scaffold it using the interactive initialization goal:
+
+```bash
+mvn architecture-guard:init
+```
+
+**What this command does:**
+1. Scans `src/main/java` to auto-detect your project's root package (e.g. `com.mycompany.service`).
+2. Generates a production-ready, commented `archguard.yml` in the project root directory (alongside `pom.xml`).
+3. Automatically takes effect on all subsequent `mvn clean verify` builds.
+
+---
+
+### File Discovery & Precedence
+ArchGuard automatically searches for configuration files using the following precedence ladder:
+1. `archguard.yml`
+2. `archguard.yaml`
+3. `.archguard.yml`
+4. `archguard.json`
+
+#### Multi-Module Upward Discovery
+In Maven multi-module projects, submodules do not need duplicate configuration files. If a submodule does not have its own `archguard.yml`, ArchGuard **automatically walks up the directory hierarchy (up to 4 parent levels)** to discover the root configuration file. This allows single-point governance across the entire repository.
+
+*(You can also explicitly specify a custom path in `pom.xml` using `<configFile>path/to/my-config.yml</configFile>` or via CLI `-Darchguard.configFile=...`)*.
+
+---
+
+### Complete `archguard.yml` Schema Reference
 
 ```yaml
-project:
-  name: "demo-application"
-  base-packages:
-    - "com.example.demo"
+# ==============================================================================
+# Architecture Guard Configuration
+# Documentation: https://github.com/javatechgroup/ArchGaurd
+# ==============================================================================
 
-thresholds:
-  max-method-lines: 50
-  max-file-lines: 300
-  max-injected-dependencies: 5
-  max-cyclomatic-complexity: 15
-  max-cognitive-complexity: 15
+# 1. Global Analysis Settings (overrides plugin defaults if set)
+analysis:
+  failOnSeverity: ERROR             # Build failure threshold: ERROR, WARNING, INFO, NONE
+  failOnNewViolations: true         # When baseline is present, only fail on new issues
+  outputDir: target/architecture-guard # Target directory for generated reports
+  baselineFile: .architecture-guard-baseline.json # Snapshot file for legacy technical debt
 
-layers:
-  CONTROLLER:
-    packages: ["..controller..", "..controllers..", "..web..", "..api.."]
-    may-only-access: ["SERVICE", "MODEL", "COMMON"]
-  SERVICE:
-    packages: ["..service..", "..services.."]
-    may-only-access: ["REPOSITORY", "MODEL", "COMMON", "SERVICE"]
-  REPOSITORY:
-    packages: ["..repository..", "..repositories..", "..dao.."]
-    may-only-access: ["MODEL", "COMMON"]
-  MODEL:
-    packages: ["..model..", "..models..", "..entity..", "..domain..", "..dto.."]
-    may-only-access: ["COMMON"]
+# 2. Layer Package Mapping
+# Map custom package structures to architectural layers (AG001 - AG004).
+# If omitted, ArchGuard automatically detects layers via Spring annotations
+# (@RestController, @Service, @Repository, @Entity) and package conventions (*.controller.*, etc.).
+packages:
+  controller:
+    - com.mycompany.app.controller.*
+    - com.mycompany.app.web.*
+    - com.mycompany.app.api.*
+  service:
+    - com.mycompany.app.service.*
+    - com.mycompany.app.core.*
+  repository:
+    - com.mycompany.app.repository.*
+    - com.mycompany.app.dao.*
+  entity:
+    - com.mycompany.app.model.*
+    - com.mycompany.app.entity.*
 
-reporting:
-  formats: ["CONSOLE", "JSON", "HTML", "SARIF"]
-  output-dir: "target/architecture-guard"
-  fail-on: "ERROR"
-  fail-on-new-violations: true
+# 3. Rule Overrides & Toggles
+# Enable/disable specific rules or override their default severity.
+rules:
+  AG001:
+    enabled: true
+    severity: ERROR                 # Controller -> Repository bypass
+  AG015:
+    enabled: true
+    severity: WARNING               # Missing @Valid on @RequestBody (downgrade or disable)
+  AG021:
+    enabled: true
+    severity: ERROR                 # Spring AOP proxy self-invocation
+  AG022:
+    enabled: true
+    severity: ERROR                 # Singleton mutable state / concurrency hazards
+  AG026:
+    enabled: true
+    severity: ERROR                 # Remote I/O in @Transactional
+  AG027:
+    enabled: true
+    severity: WARNING               # Java 21 Virtual Thread carrier pinning
+
+# 4. Strict Package Boundary Rules
+# Define custom directional access rules between specific packages:
+# "key package may ONLY import from the listed packages"
+packageBoundaries:
+  com.mycompany.app.controller:
+    - com.mycompany.app.service
+    - com.mycompany.app.dto
+  com.mycompany.app.repository:
+    - com.mycompany.app.model
+
+# 5. Global Code Exclusions (Ant-style glob patterns)
+# Completely excluded from all architectural and code quality inspection
+exclusions:
+  - "**/generated/**"               # MapStruct, OpenAPI, or Lombok generated code
+  - "**/*Test.java"                 # Test sources (analyzed separately if configured)
+  - "com.mycompany.app.dto.*"       # Pure transfer objects
+
+# 6. Report Output Formats
+reportFormats:
+  - CONSOLE                         # Colorized terminal summary
+  - HTML                            # Self-contained interactive dark/light dashboard
+  - SARIF                           # Standard OASIS SARIF 2.1.0 for GitHub / GitLab PR annotations
+  - JSON                            # Machine-readable report for automation
+```
+
+---
+
+### Custom Architecture Example: Hexagonal / Clean Architecture
+
+If your service follows Hexagonal (Ports & Adapters) or Clean Architecture instead of classical 3-tier MVC, map your ports and adapters directly:
+
+```yaml
+packages:
+  controller:
+    - com.mycompany.order.adapter.in.web.*
+    - com.mycompany.order.adapter.in.rest.*
+  service:
+    - com.mycompany.order.application.service.*
+    - com.mycompany.order.port.in.*
+  repository:
+    - com.mycompany.order.adapter.out.persistence.*
+    - com.mycompany.order.port.out.*
+  entity:
+    - com.mycompany.order.domain.model.*
+
+packageBoundaries:
+  com.mycompany.order.domain:
+    # Domain core must be completely isolated and have zero outbound dependencies
+    - java.lang
+    - java.util
 ```
 
 ---
@@ -927,11 +1104,13 @@ ArchGuard automatically generates comprehensive reporting artifacts in `target/a
    - **Reviewer Checklist:** Auto-generates a clean markdown checklist for peer reviewers and tech leads.
 
 3. **`report.html` (Offline Interactive Dashboard):**
-   - Modern, responsive dark-themed dashboard with zero external CDN dependencies.
+   - **Self-Contained & Offline:** 100% standalone single-file HTML report with embedded CSS/JS and zero external CDN dependencies.
    - **PR Code Review Banner:** Shows review verdict and 1-click filter buttons (`Focus on PR Delta`, `Show Errors Only`).
-   - Live search and filter bar for rules, classes, and severities.
-   - Distinct badges (`NEW` vs `BASELINED`).
-   - Monospace formatted code evidence blocks with exact line numbers and remediation tips.
+   - **Sidebar Rule Filtering:** Toggle between **`⚠️ Issues Only`** (shows only rules that have active violations to accelerate review) and **`All Rules`** (full 29-rule catalog), with real-time rule search.
+   - **Dedicated `🛡️ Suppressed (N)` Scope:** Auditable tab displaying all code-suppressed violations with distinct **`🛡️ SUPPRESSED IN CODE`** badges without polluting the active failure counts.
+   - **One-Click IDE Deep Links:** Normalized links (`vscode://file/...` and `idea://open?file=...`) allowing instant 1-click jumps directly to offending lines in VS Code or IntelliJ IDEA on Windows, macOS, and Linux.
+   - **Zero-Results Empty State:** Friendly search and filter feedback with an interactive **`↺ Reset All Filters`** button.
+   - **Interactive Code Preview & PR Comment Export:** Click **`🔍 View Source Code`** to preview the exact method snippet or **`📋 Copy PR Comment`** for pre-formatted GitHub/GitLab review comments.
 
 4. **`report.json` (Machine-Readable Output):**
    - Full structured schema containing execution metadata, rule results, SHA-256 fingerprints, and differential breakdowns.
