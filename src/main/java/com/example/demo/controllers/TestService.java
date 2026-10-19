@@ -11,6 +11,6 @@ public class TestService {
 	public TestService(TestController testController, Service2 service2) {	
 		this.testController = testController;
 		this.service2 = service2;
-		System.out.println("TestService: Constructor called");
+		//System.out.println("TestService: Constructor called");
 	}
 }
