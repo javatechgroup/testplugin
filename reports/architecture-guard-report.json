@@ -5,13 +5,13 @@
     "toolVersion" : "1.0.0",
     "schemaVersion" : "1.0.0",
     "targetProjectPath" : "D:\\Plugi-Demoo\\testplugin",
-    "timestamp" : "2026-10-23T09:20:22.208589900Z",
-    "executionDurationMs" : 2166
+    "timestamp" : "2026-10-23T09:27:52.582801700Z",
+    "executionDurationMs" : 1875
   },
   "status" : "FAILED_VIOLATIONS",
-  "classesAnalyzed" : 50,
+  "classesAnalyzed" : 57,
   "rulesExecuted" : 30,
-  "totalDependencies" : 87,
+  "totalDependencies" : 91,
   "dependencies" : [ {
     "sourceClass" : "com.example.demo.boundary.external.ExternalGatewayService",
     "targetClass" : "com.example.demo.boundary.internal.InternalSecurityToken",
@@ -212,6 +212,38 @@
     "dependencyType" : "CONSTRUCTOR_CALL",
     "description" : "Instantiates com.example.demo.controllers.Order",
     "lineNumber" : 18
+  }, {
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationController",
+    "targetClass" : "com.example.demo.controllers.UserAccount",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "METHOD_RETURN_TYPE",
+    "description" : "Method getAccount returns com.example.demo.controllers.UserAccount",
+    "lineNumber" : -1
+  }, {
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationController",
+    "targetClass" : "com.example.demo.controllers.UserAccount",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "CONSTRUCTOR_CALL",
+    "description" : "Instantiates com.example.demo.controllers.UserAccount",
+    "lineNumber" : 23
+  }, {
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "targetClass" : "com.example.demo.controllers.UserAccount",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "METHOD_CALL",
+    "description" : "Invokes method getEmail on com.example.demo.controllers.UserAccount",
+    "lineNumber" : 37
+  }, {
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "targetClass" : "com.example.demo.controllers.UserAccount",
+    "sourcePackage" : "com.example.demo.controllers",
+    "targetPackage" : "com.example.demo.controllers",
+    "dependencyType" : "METHOD_CALL",
+    "description" : "Invokes method getUsername on com.example.demo.controllers.UserAccount",
+    "lineNumber" : 40
   }, {
     "sourceClass" : "com.example.demo.controllers.Service2",
     "targetClass" : "com.example.demo.controllers.TestController",
@@ -710,14 +742,20 @@
     "lineNumber" : 39
   } ],
   "classLayers" : {
+    "com.example.demo.controllers.PrecisionDemonstrationService" : [ "SERVICE" ],
     "com.example.demo.controllers.DemoOrderEntity" : [ "ENTITY" ],
     "com.example.demo.controllers.CompliantEnterpriseQualityService" : [ "SERVICE" ],
+    "com.example.demo.controllers.PrecisionDemonstrationController" : [ "CONTROLLER" ],
     "com.example.demo.controllers.OrderRepository" : [ "REPOSITORY" ],
+    "com.example.demo.controllers.UserAccount" : [ "ENTITY" ],
     "com.example.demo.boundary.external.ExternalGatewayService" : [ "SERVICE" ],
     "com.example.demo.controllers.ViolatingEnterpriseQualityService" : [ "SERVICE" ],
     "com.example.demo.controllers.TestService" : [ "SERVICE" ],
     "com.example.demo.controllers.TestController" : [ "CONTROLLER" ],
+    "com.example.demo.controllers.CompliantHttpClientTimeoutService" : [ "SERVICE" ],
     "com.example.demo.controllers.CompliantOrderProcessingService" : [ "SERVICE" ],
+    "com.example.demo.controllers.ViolatingHttpClientTimeoutService" : [ "SERVICE" ],
+    "com.example.demo.controllers.DemoAsyncService" : [ "SERVICE" ],
     "com.example.demo.controllers.Service2" : [ "SERVICE" ],
     "com.example.demo.controllers.ViolatingOrderProcessingService" : [ "SERVICE" ],
     "com.example.demo.controllers.DemoCustomerEntity" : [ "ENTITY" ],
@@ -891,6 +929,54 @@
     "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\TestController.java",
     "lineNumber" : 8,
     "fingerprint" : "eaba1a1808e6681c",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG011",
+    "ruleName" : "Direct Console Output (System.out / printStackTrace)",
+    "severity" : "WARNING",
+    "sourceClass" : "com.example.demo.controllers.DemoAsyncService",
+    "message" : "Direct console call 'System.out.println' in method 'executeBackgroundNotification'.",
+    "evidence" : "System.out.println(\"Executing bounded background notification\")",
+    "remediation" : "Replace 'System.out.println' with structured logging (e.g., 'private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.DemoAsyncService.class);' or Lombok @Slf4j).",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\GlobalAsyncConfiguration.java",
+    "lineNumber" : 39,
+    "fingerprint" : "82597d9d7cbc4eef",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG011",
+    "ruleName" : "Direct Console Output (System.out / printStackTrace)",
+    "severity" : "WARNING",
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "message" : "Direct console call 'System.out.println' in method 'executeUnderSafeLock'.",
+    "evidence" : "System.out.println(\"Executing thread-safe operation\")",
+    "remediation" : "Replace 'System.out.println' with structured logging (e.g., 'private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.PrecisionDemonstrationService.class);' or Lombok @Slf4j).",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\PrecisionDemonstrationService.java",
+    "lineNumber" : 104,
+    "fingerprint" : "b7e87e59f6b63375",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG011",
+    "ruleName" : "Direct Console Output (System.out / printStackTrace)",
+    "severity" : "WARNING",
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "message" : "Direct console call 'System.out.println' in method 'executeUnderUnsafeLock'.",
+    "evidence" : "System.out.println(\"Dangerous: Missing finally block!\")",
+    "remediation" : "Replace 'System.out.println' with structured logging (e.g., 'private static final Logger log = LoggerFactory.getLogger(com.example.demo.controllers.PrecisionDemonstrationService.class);' or Lombok @Slf4j).",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\PrecisionDemonstrationService.java",
+    "lineNumber" : 113,
+    "fingerprint" : "d31d5b82c9083167",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG012",
+    "ruleName" : "Direct Entity Exposure in REST Endpoint",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationController",
+    "message" : "REST endpoint 'com.example.demo.controllers.PrecisionDemonstrationController.getAccount()' directly exposes entity 'UserAccount' in Return Type.",
+    "evidence" : "Return Type: UserAccount",
+    "remediation" : "Map the entity to a dedicated DTO (Data Transfer Object) or Java 21 Record before returning from or accepting in REST controllers.",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\PrecisionDemonstrationController.java",
+    "lineNumber" : 21,
+    "fingerprint" : "0297bd0ab4d5a7ce",
     "suppressed" : false
   }, {
     "ruleId" : "AG012",
@@ -1299,6 +1385,18 @@
     "suppressed" : false
   }, {
     "ruleId" : "AG027",
+    "ruleName" : "Unreleased Concurrency Lock",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "message" : "Method 'com.example.demo.controllers.PrecisionDemonstrationService.executeUnderUnsafeLock()' acquires lock via 'unsafeLock.lock()' without releasing it in a finally block, causing permanent application deadlocks.",
+    "evidence" : "unsafeLock.lock()",
+    "remediation" : "Always structure lock acquisition with try-finally: lock.lock(); try { ... } finally { lock.unlock(); }",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\PrecisionDemonstrationService.java",
+    "lineNumber" : 112,
+    "fingerprint" : "8c2a1a46100520d7",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG027",
     "ruleName" : "Java 21 Virtual Thread Pinning",
     "severity" : "WARNING",
     "sourceClass" : "com.example.demo.controllers.ViolatingEnterpriseQualityService",
@@ -1334,16 +1432,16 @@
     "fingerprint" : "2389b82d64ad2fc9",
     "suppressed" : false
   }, {
-    "ruleId" : "AG029",
-    "ruleName" : "Unbounded @Async Thread Pool Exhaustion",
-    "severity" : "WARNING",
-    "sourceClass" : "com.example.demo.controllers.ViolatingEnterpriseQualityService",
-    "message" : "Method 'com.example.demo.controllers.ViolatingEnterpriseQualityService.dispatchAsyncNotification()' uses unparameterized @Async without an explicit ThreadPoolTaskExecutor qualifier.",
-    "evidence" : "@Async",
-    "remediation" : "Specify an explicit bounded ThreadPoolTaskExecutor bean qualifier, e.g., @Async(\"taskExecutor\"), to ensure thread reuse and prevent thread exhaustion.",
-    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingEnterpriseQualityService.java",
-    "lineNumber" : 49,
-    "fingerprint" : "2f1e79929d0b2f95",
+    "ruleId" : "AG030",
+    "ruleName" : "Missing HTTP Client Timeout Configuration",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.PrecisionDemonstrationService",
+    "message" : "Method 'com.example.demo.controllers.PrecisionDemonstrationService.createUnconfiguredRestClient()' creates or exposes unconfigured RestClient.Builder lacking explicit timeouts.",
+    "evidence" : "Call to RestClient.Builder.build() without explicit connection or read timeout configuration.",
+    "remediation" : "Inject a RestTemplate configured with connect/read timeouts via RestTemplateBuilder or configure a ClientHttpRequestFactory with setConnectTimeout() and setReadTimeout().",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\PrecisionDemonstrationService.java",
+    "lineNumber" : 119,
+    "fingerprint" : "a58dc4024a4e5786",
     "suppressed" : false
   }, {
     "ruleId" : "AG030",
@@ -1357,12 +1455,48 @@
     "lineNumber" : 102,
     "fingerprint" : "30eb89bc14656d82",
     "suppressed" : false
+  }, {
+    "ruleId" : "AG030",
+    "ruleName" : "Missing HTTP Client Timeout Configuration",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.ViolatingHttpClientTimeoutService",
+    "message" : "Method 'com.example.demo.controllers.ViolatingHttpClientTimeoutService.callWithJavaHttpClient()' creates or exposes unconfigured HttpClient lacking explicit timeouts.",
+    "evidence" : "Call to HttpClient.newHttpClient() creates an immutable HTTP client without a connection timeout.",
+    "remediation" : "Build the client with an explicit connection timeout using HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(...)).build() instead of HttpClient.newHttpClient().",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingHttpClientTimeoutService.java",
+    "lineNumber" : 22,
+    "fingerprint" : "6de8382cc5ae1276",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG030",
+    "ruleName" : "Missing HTTP Client Timeout Configuration",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.ViolatingHttpClientTimeoutService",
+    "message" : "Method 'com.example.demo.controllers.ViolatingHttpClientTimeoutService.callDownstreamService()' creates or exposes unconfigured RestTemplate lacking explicit timeouts.",
+    "evidence" : "Direct instantiation of 'new RestTemplate()' in Spring component without timeout configuration.",
+    "remediation" : "Inject a RestTemplate configured with connect/read timeouts via RestTemplateBuilder or configure a ClientHttpRequestFactory with setConnectTimeout() and setReadTimeout().",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingHttpClientTimeoutService.java",
+    "lineNumber" : 16,
+    "fingerprint" : "c2ba6b8dc7d9a5f8",
+    "suppressed" : false
+  }, {
+    "ruleId" : "AG030",
+    "ruleName" : "Missing HTTP Client Timeout Configuration",
+    "severity" : "ERROR",
+    "sourceClass" : "com.example.demo.controllers.ViolatingHttpClientTimeoutService",
+    "message" : "Method 'com.example.demo.controllers.ViolatingHttpClientTimeoutService.unconfiguredRestTemplateBean()' creates or exposes unconfigured RestTemplate lacking explicit timeouts.",
+    "evidence" : "@Bean method 'unconfiguredRestTemplateBean()' returns raw unconfigured RestTemplate with infinite default timeout.",
+    "remediation" : "Inject a RestTemplate configured with connect/read timeouts via RestTemplateBuilder or configure a ClientHttpRequestFactory with setConnectTimeout() and setReadTimeout().",
+    "sourceFile" : "D:\\Plugi-Demoo\\testplugin\\src\\main\\java\\com\\example\\demo\\controllers\\ViolatingHttpClientTimeoutService.java",
+    "lineNumber" : 28,
+    "fingerprint" : "1e1abfcfbc60bdb2",
+    "suppressed" : false
   } ],
   "analysisErrors" : [ ],
   "violationsBySeverity" : {
     "INFO" : 0,
-    "WARNING" : 29,
-    "ERROR" : 22,
+    "WARNING" : 31,
+    "ERROR" : 28,
     "NONE" : 0
   },
   "violationsByRule" : {
@@ -1374,7 +1508,8 @@
     "AG007" : 4,
     "AG008" : 2,
     "AG010" : 1,
-    "AG012" : 1,
+    "AG011" : 3,
+    "AG012" : 2,
     "AG013" : 2,
     "AG014" : 1,
     "AG015" : 1,
@@ -1389,13 +1524,12 @@
     "AG024" : 1,
     "AG025" : 1,
     "AG026" : 2,
-    "AG027" : 2,
+    "AG027" : 3,
     "AG028" : 1,
-    "AG029" : 1,
-    "AG030" : 1
+    "AG030" : 5
   },
-  "infoCount" : 0,
-  "errorCount" : 22,
-  "totalViolations" : 51,
-  "warningCount" : 29
+  "totalViolations" : 59,
+  "warningCount" : 31,
+  "errorCount" : 28,
+  "infoCount" : 0
 }
